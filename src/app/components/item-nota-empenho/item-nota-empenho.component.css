@@ -1,0 +1,11 @@
+h5{
+    margin-top: 20px;
+    margin-bottom: 30px;;
+    font-weight: bold;
+}
+
+input, label, textarea{
+    max-width: 300px;
+    margin-top: 5px;
+}
+

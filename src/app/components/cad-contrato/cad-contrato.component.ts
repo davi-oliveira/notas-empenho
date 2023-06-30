@@ -49,7 +49,7 @@ export class CadContratoComponent implements OnInit {
   openCadCont(){
     setTimeout(() => {
       this.divCont.nativeElement.classList.remove("d-none");
-      this.tableConts.nativeElement.classList.add("opacity-25");
+      this.tableConts.nativeElement.classList.add("opacity-25", "tabEsc");
       this.btnCadCont.nativeElement.classList.add("d-none");
     })
   }
@@ -57,7 +57,7 @@ export class CadContratoComponent implements OnInit {
   closeCadCont(){
     setTimeout(() => {
       this.divCont.nativeElement.classList.add("d-none");
-      this.tableConts.nativeElement.classList.remove("opacity-25");
+      this.tableConts.nativeElement.classList.remove("opacity-25", "tabEsc");
       this.btnCadCont.nativeElement.classList.remove("d-none");
     })
   }

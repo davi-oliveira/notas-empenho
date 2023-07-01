@@ -39,7 +39,10 @@
       </tr>
     </tbody>
   </table>
-  <p class="text-end">Total: {{contratos.length}} contratos</p>
+  <p class="text-end">Total: {{contratos.length}}
+    <span *ngIf="contratos.length!=1">contratos</span>
+    <span *ngIf="contratos.length===1">contrato</span>
+  </p>
 
   <!------------- CARD SOBREPOSTO --------------------------->
   <div class="d-none text-white position-absolute w-100 h-100 d-flex justify-content-center align-items-center"

@@ -8,12 +8,12 @@ import { Contrato } from '../interfaces/Contrato';
 })
 export class ListService {
 
-  apiUrl = "http://10.133.1.41:8080/contratos"
+  apiUrl = "http://192.168.0.58:8080/contratos"
 
   constructor(private http: HttpClient) { }
 
-  getAll(): Observable<Contrato[]>{
-    return this.http.get<Contrato[]>(this.apiUrl)
+  getCtn(): Observable<Contrato[]>{
+    return this.http.get<Contrato[]>(this.apiUrl + '?ordem=numero_contrato')
   }
 
   cadContrato(dados: Contrato){

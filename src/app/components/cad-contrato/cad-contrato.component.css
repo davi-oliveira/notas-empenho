@@ -1,3 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+*{
+    font-family: 'Roboto', sans-serif;
+}
+
 h5{
     margin-top: 20px;
     margin-bottom: 30px;;
@@ -10,4 +16,8 @@ input, label, textarea{
 
 .tabEsc{
     margin-top: 40px;
+}
+
+.transparencia{
+    opacity: .1;
 }

@@ -2,11 +2,19 @@
   <!---------------------  LISTAGEM --------------------------->
 
   <div class="d-flex justify-content-end mt-3">
-    <button type="button" class="btn btn-primary" style="right: 5px; top: 1px;" (click)="openCadCont()" #btnCadCont>Cadastrar</button>
+    <button type="button" class="btn btn-outline-secondary" (click)="getContratos()">Atualizar</button>
+    <button
+      type="button"
+      class="btn btn-outline-primary shadow-sm ms-2"
+      style="right: 5px; top: 1px"
+      (click)="openCadCont()"
+      #btnCadCont
+    >
+      Cadastrar
+    </button>
   </div>
   <table class="table" #tableConts>
     <thead>
-      
       <tr>
         <th scope="col">Nº do contrato</th>
         <th scope="col">Ano</th>
@@ -21,14 +29,14 @@
         <td>{{ contrato.descricao }}</td>
         <td>
           <img
-            style="margin-right: 10px; cursor: pointer;"
+            style="margin-right: 10px; cursor: pointer"
             title="Editar"
             src="/assets/imgs/pencil.png"
             alt="Editar"
             (click)="editar(contrato)"
           />
           <img
-            style="cursor: pointer;"
+            style="cursor: pointer"
             title="Excluir"
             src="/assets/imgs/delete.png"
             alt="Excluir"
@@ -38,19 +46,18 @@
       </tr>
     </tbody>
   </table>
-  <!------------- CARD SOBREPOSTO --------------------------->
 
+  <!------------- CARD SOBREPOSTO --------------------------->
   <div
     class="d-none text-white position-absolute w-100 h-100 d-flex justify-content-center align-items-center"
-    style="top: 15px;" #divCont
+    style="top: 15px"
+    #divCont
   >
     <form
-      class="text-black d-flex flex-column align-items-center justify-content-center"
+      class="text-black d-flex flex-column align-items-center justify-content-center shadow-sm bg-white rounded col-10 col-sm-10 col-md-6 col-lg-4 col-xl-4"
       style="
-        background-color: rgba(0, 0, 255, 0.5);
         min-width: 22vw;
         min-height: 50vh;
-        border-radius: 13px;
       "
     >
       <h3 class="mb-4 font-weight-bold">Cadastrar Contrato</h3>
@@ -59,20 +66,28 @@
         <input
           type="number"
           [(ngModel)]="numCont"
+          id="validationNumCont"
           name="numCont"
           class="form-control input-numero-contrato"
-          aria-describedby="emailHelp"
+          aria-describedby="emailHelp" (blur)="validNumCont()" #inputNumCont
         />
+        <div id="validationNumCont" class="invalid-feedback">
+          Contrato já existente
+        </div>
       </div>
       <div class="mb-3 d-flex flex-column align-items-center">
         <label class="form-label">Ano de implantação:</label>
         <input
           type="number"
           [(ngModel)]="ano"
+          id="validationAnoCont"
           name="ano"
           class="form-control input-numero-contrato"
-          aria-describedby="emailHelp"
+          aria-describedby="emailHelp" (blur)="validAnoCont()" #anoCont
         />
+        <div id="validationAnoCont" class="invalid-feedback">
+          Digite um ano válido
+        </div>
       </div>
       <div class="mb-3 d-flex flex-column align-items-center">
         <label for="inputNumContrato" class="form-label">Descrição:</label>
@@ -90,12 +105,18 @@
         <button
           type="button"
           (click)="cadastrar()"
-          class="btn btn-primary mt-3 float-right text-right"
+          class="btn btn-outline-primary mt-3 float-right text-right shadow-sm" 
         >
           Cadastrar
         </button>
       </div>
     </form>
-    <img src="/assets/imgs/delete.png" alt="" srcset="" style="position: absolute; top: 5px; right: 5px; cursor: pointer;" (click)="closeCadCont()">
+    <img
+      src="/assets/imgs/delete.png"
+      alt=""
+      srcset=""
+      style="position: absolute; top: 5px; right: 5px; cursor: pointer"
+      (click)="closeCadCont()"
+    />
   </div>
 </div>

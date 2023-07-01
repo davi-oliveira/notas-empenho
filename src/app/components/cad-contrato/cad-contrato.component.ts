@@ -13,7 +13,7 @@ export class CadContratoComponent implements OnInit {
   numCont: number = 0;
   ano: number = 0;
   desc: String = '';
-  verbo: String = 'cadastrar';
+  operacao: String = 'Cadastrar';
 
   contratos: Contrato[] = [];
 
@@ -40,7 +40,7 @@ export class CadContratoComponent implements OnInit {
 
   //================ VALIDAÇÕES ================//
   validNumCont() {
-    if (this.contExists(this.numCont)) {
+    if (this.contExists(this.numCont) && this.operacao == 'Cadastrar') {
       this.inputNumCont.nativeElement.classList.add('is-invalid');
       return false;
     } else {
@@ -74,7 +74,7 @@ export class CadContratoComponent implements OnInit {
   }
 
   cadastrar() {
-    if (!this.validNumCont() || !this.validAnoCont()) return;
+    if ( (this.operacao == 'Cadastrar' && !this.validNumCont()) || !this.validAnoCont()) return;
 
     let newCont: Contrato = {
       numero_contrato: this.numCont,
@@ -82,7 +82,10 @@ export class CadContratoComponent implements OnInit {
       descricao: this.desc,
     };
 
-    this.listService.cadContrato(newCont.descricao != '' ? newCont : { ...newCont, descricao: 'N/D' }); //se a descrição estiver vazia envia um "N/D"
+    if(this.operacao == 'Cadastrar') 
+      this.listService.cadContrato(newCont.descricao != '' ? newCont : { ...newCont, descricao: 'N/D' }); //se a descrição estiver vazia envia um "N/D"
+    else if(this.operacao == 'Editar')
+    this.listService.editContrato(newCont.descricao != '' ? newCont : { ...newCont, descricao: 'N/D' }); //se a descrição estiver vazia envia um "N/D"
 
     setTimeout(() => this.getContratos(), 500); //atualizar a lista após adicionado
     this.clearForm();
@@ -102,12 +105,24 @@ export class CadContratoComponent implements OnInit {
       this.divCont.nativeElement.classList.add('d-none');
       this.tableConts.nativeElement.classList.remove('transparencia', 'tabEsc');
       this.btnsCont.nativeElement.classList.remove('d-none');
+      this.operacao = "Cadastrar";
+      this.inputNumCont.nativeElement.disabled = false;
+      this.clearForm();
     });
   }
 
   excluir(contrato: Contrato) { }
 
-  editar(contrato: Contrato) { }
+  editar(contrato: Contrato) { 
+    this.openCadCont();
+    this.operacao = 'Editar';
+
+    this.numCont = contrato.numero_contrato;
+    this.ano = contrato.ano;
+    this.desc = contrato.descricao;
+
+    this.inputNumCont.nativeElement.disabled = true;
+  }
 
   clearForm() {
     this.numCont = 0;

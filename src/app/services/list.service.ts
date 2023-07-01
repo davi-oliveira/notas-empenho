@@ -22,4 +22,11 @@ export class ListService {
         console.log(erro)
     })
   }
+
+  editContrato(dados: Contrato){
+    this.http.put<Contrato>(this.apiUrl, dados).subscribe(erro => { 
+      if(erro)
+        console.log(erro)
+    })
+  }
 }

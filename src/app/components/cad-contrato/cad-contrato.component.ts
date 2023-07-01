@@ -14,7 +14,8 @@ export class CadContratoComponent implements OnInit {
   ano: number = 0;
   desc: String = '';
   operacao: String = 'Cadastrar';
-  lastInfo: String = "";
+
+  lastInfo: any = { message: '', icon: ''};
 
   contratos: Contrato[] = [];
 
@@ -40,6 +41,9 @@ export class CadContratoComponent implements OnInit {
 
   @ViewChild('divInfo', { static: false })
   divInfo!: ElementRef;
+
+  @ViewChild('iconMsg', { static: false })
+  iconMsg!: ElementRef;
   //================= FIM ELEMENTOS DOM ========//
 
   //================ VALIDAÇÕES ================//
@@ -88,11 +92,11 @@ export class CadContratoComponent implements OnInit {
 
     if(this.operacao == 'Cadastrar'){
       this.listService.cadContrato(newCont.descricao != '' ? newCont : { ...newCont, descricao: 'N/D' }); //se a descrição estiver vazia envia um "N/D"
-      this.activeInfoBox(`Contrato ${newCont.numero_contrato} criado com sucesso!`, "new");
+      this.activeInfoBox(`Contrato <strong>${newCont.numero_contrato}</strong> criado com sucesso!`, "new", "folder-plus");
     }
     else if(this.operacao == 'Editar'){
       this.listService.editContrato(newCont.descricao != '' ? newCont : { ...newCont, descricao: 'N/D' }); //se a descrição estiver vazia envia um "N/D"
-      this.activeInfoBox(`Contrato ${newCont.numero_contrato} editado com sucesso!`, "edit");
+      this.activeInfoBox(`Contrato <strong>${newCont.numero_contrato}</strong> editado com sucesso!`, "edit", "info-circle");
     }
 
     setTimeout(() => this.getContratos(), 500); //atualizar a lista após adicionado
@@ -125,7 +129,7 @@ export class CadContratoComponent implements OnInit {
       this.listService.deleteCont(contrato);
       setTimeout(() => {
         this.getContratos()
-        this.activeInfoBox(`Contrato ${contrato.numero_contrato} excluido!`, "delete");
+        this.activeInfoBox(`Contrato <strong>${contrato.numero_contrato}</strong> excluido!`, "delete", "trash");
       }, 500); //atualizar a lista após excluido
     }
   }
@@ -147,7 +151,7 @@ export class CadContratoComponent implements OnInit {
     this.desc = '';
   }
 
-  activeInfoBox(message: String, type: "delete" | "edit" | "new"){
+  activeInfoBox(message: String, type: "delete" | "edit" | "new", icon: String){
     if(type == "delete"){
       this.divInfo.nativeElement.classList.remove('alert-primary', 'alert-success');
       this.divInfo.nativeElement.classList.add('alert-danger');
@@ -163,7 +167,9 @@ export class CadContratoComponent implements OnInit {
     }
 
     this.divInfo.nativeElement.classList.remove('opacity-0');
-    this.lastInfo = message;
+    this.lastInfo = { message, icon }
+
+    //this.iconMsg.nativeElement.name = "folder-plus";
   }
 
   disableInfoBox(){

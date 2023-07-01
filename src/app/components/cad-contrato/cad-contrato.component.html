@@ -1,16 +1,20 @@
 <div class="page position-relative" style="min-height: 70vh">
   <!---------------------  LISTAGEM --------------------------->
 
-  <div class="d-flex justify-content-end mt-3">
-    <div class="buttons" #btnsCont>
-      <button type="button" class="btn btn-outline-secondary" (click)="getContratos()">
-        Atualizar
-      </button>
-      <button type="button" class="btn btn-outline-primary shadow-sm ms-2" style="right: 5px; top: 1px"
-        (click)="openCadCont()">
-        Cadastrar
-      </button>
-    </div>
+  <div class="d-flex justify-content-between mt-3">
+      <div class="alert alert-danger opacity-0" role="alert" #divInfo>
+        <span>{{lastInfo}}</span>
+      </div>
+
+      <div class="buttons" #btnsCont style="max-width: 67.5vw;">
+        <button type="button" class="btn btn-outline-secondary float-end ms-1" (click)="getContratos()">
+          Atualizar
+        </button>
+        <button type="button" class="btn btn-outline-primary shadow-sm ms-2 float-end"
+          (click)="openCadCont()">
+          Cadastrar
+        </button>
+      </div>
   </div>
   <table class="table" #tableConts>
     <thead>
@@ -35,6 +39,7 @@
       </tr>
     </tbody>
   </table>
+  <p class="text-end">Total: {{contratos.length}} contratos</p>
 
   <!------------- CARD SOBREPOSTO --------------------------->
   <div class="d-none text-white position-absolute w-100 h-100 d-flex justify-content-center align-items-center"

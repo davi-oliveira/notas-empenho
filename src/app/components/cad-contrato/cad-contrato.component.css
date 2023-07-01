@@ -21,3 +21,10 @@ input, label, textarea{
 .transparencia{
     opacity: .1;
 }
+
+.alert{
+    display: flex;
+    max-height: 42px;
+    justify-content: center;
+    align-items: center;
+}

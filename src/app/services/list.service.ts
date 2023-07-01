@@ -29,4 +29,11 @@ export class ListService {
         console.log(erro)
     })
   }
+
+  deleteCont(dados: Contrato){
+    this.http.delete<Contrato>(this.apiUrl + '/delete/' + dados.numero_contrato).subscribe(erro => { 
+      if(erro)
+        console.log(erro)
+    })
+  }
 }

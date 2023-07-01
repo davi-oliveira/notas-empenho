@@ -14,6 +14,7 @@ export class CadContratoComponent implements OnInit {
   ano: number = 0;
   desc: String = '';
   operacao: String = 'Cadastrar';
+  lastInfo: String = "";
 
   contratos: Contrato[] = [];
 
@@ -36,6 +37,9 @@ export class CadContratoComponent implements OnInit {
 
   @ViewChild('anoCont', { static: false })
   anoCont!: ElementRef;
+
+  @ViewChild('divInfo', { static: false })
+  divInfo!: ElementRef;
   //================= FIM ELEMENTOS DOM ========//
 
   //================ VALIDAÇÕES ================//
@@ -82,10 +86,14 @@ export class CadContratoComponent implements OnInit {
       descricao: this.desc,
     };
 
-    if(this.operacao == 'Cadastrar') 
+    if(this.operacao == 'Cadastrar'){
       this.listService.cadContrato(newCont.descricao != '' ? newCont : { ...newCont, descricao: 'N/D' }); //se a descrição estiver vazia envia um "N/D"
-    else if(this.operacao == 'Editar')
-    this.listService.editContrato(newCont.descricao != '' ? newCont : { ...newCont, descricao: 'N/D' }); //se a descrição estiver vazia envia um "N/D"
+      this.activeInfoBox(`Contrato ${newCont.numero_contrato} criado com sucesso!`, "new");
+    }
+    else if(this.operacao == 'Editar'){
+      this.listService.editContrato(newCont.descricao != '' ? newCont : { ...newCont, descricao: 'N/D' }); //se a descrição estiver vazia envia um "N/D"
+      this.activeInfoBox(`Contrato ${newCont.numero_contrato} editado com sucesso!`, "edit");
+    }
 
     setTimeout(() => this.getContratos(), 500); //atualizar a lista após adicionado
     this.clearForm();
@@ -94,6 +102,7 @@ export class CadContratoComponent implements OnInit {
 
   openCadCont() {
     setTimeout(() => {
+      this.disableInfoBox();
       this.divCont.nativeElement.classList.remove('d-none');
       this.tableConts.nativeElement.classList.add('transparencia', 'tabEsc');
       this.btnsCont.nativeElement.classList.add('d-none');
@@ -111,7 +120,15 @@ export class CadContratoComponent implements OnInit {
     });
   }
 
-  excluir(contrato: Contrato) { }
+  excluir(contrato: Contrato) { 
+    if(contrato){
+      this.listService.deleteCont(contrato);
+      setTimeout(() => {
+        this.getContratos()
+        this.activeInfoBox(`Contrato ${contrato.numero_contrato} excluido!`, "delete");
+      }, 500); //atualizar a lista após excluido
+    }
+  }
 
   editar(contrato: Contrato) { 
     this.openCadCont();
@@ -128,6 +145,29 @@ export class CadContratoComponent implements OnInit {
     this.numCont = 0;
     this.ano = 0;
     this.desc = '';
+  }
+
+  activeInfoBox(message: String, type: "delete" | "edit" | "new"){
+    if(type == "delete"){
+      this.divInfo.nativeElement.classList.remove('alert-primary', 'alert-success');
+      this.divInfo.nativeElement.classList.add('alert-danger');
+    }
+    else if(type == "edit"){
+      this.divInfo.nativeElement.classList.remove('alert-danger', 'alert-success');
+      this.divInfo.nativeElement.classList.add('alert-primary');
+    }
+
+    else if(type == "new"){
+      this.divInfo.nativeElement.classList.remove('alert-danger', 'alert-primary');
+      this.divInfo.nativeElement.classList.add('alert-success');
+    }
+
+    this.divInfo.nativeElement.classList.remove('opacity-0');
+    this.lastInfo = message;
+  }
+
+  disableInfoBox(){
+    this.divInfo.nativeElement.classList.add('opacity-0');
   }
 
   //============= FIM OPERAÇÕES ===================//

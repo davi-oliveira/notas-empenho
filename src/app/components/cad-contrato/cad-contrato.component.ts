@@ -1,5 +1,5 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { ListService } from 'src/app/services/list.service';
+import { ListService } from 'src/app/services/contratos-service/list.service';
 import { Contrato } from 'src/app/interfaces/Contrato';
 
 @Component({
@@ -10,20 +10,20 @@ import { Contrato } from 'src/app/interfaces/Contrato';
 export class CadContratoComponent implements OnInit {
   ngOnInit(): void { }
 
-  numCont: number = 0;
-  ano: number = 0;
-  desc: String = '';
-  operacao: String = 'Cadastrar';
-
-  lastInfo: any = { message: '', icon: ''};
-
-  contratos: Contrato[] = [];
-
   constructor(private listService: ListService) {
     this.getContratos();
   }
 
-  //================= ELEMENTOS DOM ============//
+  contratos: Contrato[] = [];
+
+  numCont: number = 0;
+  ano: number = 0;
+  desc: String = '';
+
+  operacao: String = 'Cadastrar';
+  lastInfo: any = { message: '', icon: '' };
+
+  //-------------- Elementos DOM ---------//
   @ViewChild('divCont', { static: false })
   divCont!: ElementRef;
 
@@ -44,9 +44,8 @@ export class CadContratoComponent implements OnInit {
 
   @ViewChild('iconMsg', { static: false })
   iconMsg!: ElementRef;
-  //================= FIM ELEMENTOS DOM ========//
 
-  //================ VALIDAÇÕES ================//
+  //--------------- Validações ---------------//
   validNumCont() {
     if (this.contExists(this.numCont) && this.operacao == 'Cadastrar') {
       this.inputNumCont.nativeElement.classList.add('is-invalid');
@@ -72,9 +71,8 @@ export class CadContratoComponent implements OnInit {
       (contrato) => contNumber == contrato.numero_contrato
     );
   }
-  //============= FIM VALIDAÇÕES =================//
 
-  //============= OPERAÇÕES =====================//
+  //--------------- Operações ----------------//
   getContratos(): void {
     this.listService
       .getCtn()
@@ -82,7 +80,7 @@ export class CadContratoComponent implements OnInit {
   }
 
   cadastrar() {
-    if ( (this.operacao == 'Cadastrar' && !this.validNumCont()) || !this.validAnoCont()) return;
+    if ((this.operacao == 'Cadastrar' && !this.validNumCont()) || !this.validAnoCont()) return;
 
     let newCont: Contrato = {
       numero_contrato: this.numCont,
@@ -90,11 +88,11 @@ export class CadContratoComponent implements OnInit {
       descricao: this.desc,
     };
 
-    if(this.operacao == 'Cadastrar'){
+    if (this.operacao == 'Cadastrar') {
       this.listService.cadContrato(newCont.descricao != '' ? newCont : { ...newCont, descricao: 'N/D' }); //se a descrição estiver vazia envia um "N/D"
       this.activeInfoBox(`Contrato <strong>${newCont.numero_contrato}</strong> criado com sucesso!`, "new", "folder-plus");
     }
-    else if(this.operacao == 'Editar'){
+    else if (this.operacao == 'Editar') {
       this.listService.editContrato(newCont.descricao != '' ? newCont : { ...newCont, descricao: 'N/D' }); //se a descrição estiver vazia envia um "N/D"
       this.activeInfoBox(`Contrato <strong>${newCont.numero_contrato}</strong> editado com sucesso!`, "edit", "info-circle");
     }
@@ -108,7 +106,7 @@ export class CadContratoComponent implements OnInit {
     setTimeout(() => {
       this.disableInfoBox();
       this.divCont.nativeElement.classList.remove('d-none');
-      this.tableConts.nativeElement.classList.add('transparencia', 'tabEsc');
+      this.tableConts.nativeElement.classList.add('transparencia');
       this.btnsCont.nativeElement.classList.add('d-none');
     });
   }
@@ -116,7 +114,7 @@ export class CadContratoComponent implements OnInit {
   closeCadCont() {
     setTimeout(() => {
       this.divCont.nativeElement.classList.add('d-none');
-      this.tableConts.nativeElement.classList.remove('transparencia', 'tabEsc');
+      this.tableConts.nativeElement.classList.remove('transparencia');
       this.btnsCont.nativeElement.classList.remove('d-none');
       this.operacao = "Cadastrar";
       this.inputNumCont.nativeElement.disabled = false;
@@ -124,8 +122,8 @@ export class CadContratoComponent implements OnInit {
     });
   }
 
-  excluir(contrato: Contrato) { 
-    if(contrato){
+  excluir(contrato: Contrato) {
+    if (contrato) {
       this.listService.deleteCont(contrato);
       setTimeout(() => {
         this.getContratos()
@@ -134,7 +132,7 @@ export class CadContratoComponent implements OnInit {
     }
   }
 
-  editar(contrato: Contrato) { 
+  editar(contrato: Contrato) {
     this.openCadCont();
     this.operacao = 'Editar';
 
@@ -151,30 +149,26 @@ export class CadContratoComponent implements OnInit {
     this.desc = '';
   }
 
-  activeInfoBox(message: String, type: "delete" | "edit" | "new", icon: String){
-    if(type == "delete"){
+  activeInfoBox(message: String, type: "delete" | "edit" | "new", icon: String) {
+    if (type == "delete") {
       this.divInfo.nativeElement.classList.remove('alert-primary', 'alert-success');
       this.divInfo.nativeElement.classList.add('alert-danger');
     }
-    else if(type == "edit"){
+    else if (type == "edit") {
       this.divInfo.nativeElement.classList.remove('alert-danger', 'alert-success');
       this.divInfo.nativeElement.classList.add('alert-primary');
     }
 
-    else if(type == "new"){
+    else if (type == "new") {
       this.divInfo.nativeElement.classList.remove('alert-danger', 'alert-primary');
       this.divInfo.nativeElement.classList.add('alert-success');
     }
 
     this.divInfo.nativeElement.classList.remove('opacity-0');
     this.lastInfo = { message, icon }
-
-    //this.iconMsg.nativeElement.name = "folder-plus";
   }
 
-  disableInfoBox(){
+  disableInfoBox() {
     this.divInfo.nativeElement.classList.add('opacity-0');
   }
-
-  //============= FIM OPERAÇÕES ===================//
 }

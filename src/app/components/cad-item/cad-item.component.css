@@ -1,3 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+*{
+    font-family: 'Roboto', sans-serif;
+}
+
 h5{
     margin-top: 20px;
     margin-bottom: 30px;;
@@ -6,4 +12,19 @@ h5{
 
 input, label, textarea{
     max-width: 300px;
+}
+
+.tabEsc{
+    margin-top: 40px;
+}
+
+.transparencia{
+    opacity: .1;
+}
+
+.alert{
+    display: flex;
+    max-height: 42px;
+    justify-content: center;
+    align-items: center;
 }

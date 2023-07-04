@@ -8,7 +8,7 @@ import { Item } from '../../interfaces/Item';
 })
 export class ListService {
 
-  apiUrl = "http://10.67.117.151:8080/itens"
+  apiUrl = "http://10.133.1.41:8080/itens"
 
   constructor(private http: HttpClient) { }
 

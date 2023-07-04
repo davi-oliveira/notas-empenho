@@ -8,7 +8,7 @@ import { Contrato } from '../../interfaces/Contrato';
 })
 export class ListService {
 
-  apiUrl = "http://10.67.117.151:8080/contratos"
+  apiUrl = "http://10.133.1.41:8080/contratos"
 
   constructor(private http: HttpClient) { }
 

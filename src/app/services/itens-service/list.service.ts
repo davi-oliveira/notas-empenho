@@ -8,12 +8,12 @@ import { Item } from '../../interfaces/Item';
 })
 export class ListService {
 
-  apiUrl = "http://192.168.0.58:8080/itens"
+  apiUrl = "http://10.67.117.151:8080/itens"
 
   constructor(private http: HttpClient) { }
 
   getItens(): Observable<Item[]> {
-    return this.http.get<Item[]>(this.apiUrl + '?ordem=numero_Item')
+    return this.http.get<Item[]>(this.apiUrl)
   }
 
   cadItem(dados: Item) {

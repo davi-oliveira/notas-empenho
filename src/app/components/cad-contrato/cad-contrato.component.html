@@ -52,10 +52,10 @@
   <div class="d-none text-white position-absolute w-100 h-100 d-flex justify-content-center align-items-center"
     style="top: 15px" #divCont>
     <form
-      class="text-black d-flex flex-column align-items-center justify-content-center shadow-sm bg-white rounded col-8 col-sm-8 col-md-6 col-lg-6 col-xl-5"
+      class="text-black d-flex flex-column align-items-center justify-content-around p-4 shadow bg-white rounded col-10 col-sm-8 col-md-6 col-lg-5 col-xl-4"
       style="min-width: 22vw; min-height: 50vh">
-      <h3 class="mb-4 font-weight-bold">{{operacao}} Contrato</h3>
-      <div class="mb-3 d-flex flex-column align-items-center">
+      <h3 class="font-weight-bold">{{operacao}} Contrato</h3>
+      <div class="d-flex flex-column align-items-center">
         <label class="form-label">Número do Contrato:</label>
         <input type="number" [(ngModel)]="numCont" id="validationNumCont" name="numCont"
           class="form-control input-numero-contrato" aria-describedby="emailHelp" (blur)="validNumCont()"
@@ -64,7 +64,7 @@
           Contrato já existente
         </div>
       </div>
-      <div class="mb-3 d-flex flex-column align-items-center">
+      <div class="d-flex flex-column align-items-center">
         <label class="form-label">Ano de implantação:</label>
         <input type="number" [(ngModel)]="ano" id="validationAnoCont" name="ano"
           class="form-control input-numero-contrato" aria-describedby="emailHelp" (blur)="validAnoCont()" #anoCont />
@@ -72,7 +72,7 @@
           Digite um ano válido
         </div>
       </div>
-      <div class="mb-3 d-flex flex-column align-items-center">
+      <div class="d-flex flex-column align-items-center">
         <label for="inputNumContrato" class="form-label">Descrição:</label>
         <div class="form-floating">
           <textarea [(ngModel)]="desc" name="desc" class="form-control" placeholder="Leave a comment here"
@@ -81,7 +81,7 @@
       </div>
       <div class="d-flex justify-content-center">
         <button type="button" (click)="cadastrar()"
-          class="btn btn-outline-primary mt-3 float-right text-right shadow-sm">
+          class="btn btn-outline-primary float-right text-right shadow-sm" id="btnCadastro">
           {{operacao}}
         </button>
       </div>

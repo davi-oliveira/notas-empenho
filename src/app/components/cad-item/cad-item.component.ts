@@ -9,7 +9,6 @@ import { Item } from 'src/app/interfaces/Item';
 })
 export class CadItemComponent implements OnInit {
   ngOnInit(): void {
-
   }
 
   constructor(private listService: ListService) {
@@ -18,8 +17,8 @@ export class CadItemComponent implements OnInit {
 
   itens: Item[] = [];
 
-  numItem: number = 0;
-  nome: String = '';
+  numItem: Number = 0;
+  nomeItem: String = '';
   desc: String = '';
   valor: Number = 0;
   und_md: String = 'N/A';
@@ -57,7 +56,7 @@ export class CadItemComponent implements OnInit {
     }
   }
 
-  itemExists(itemNumber: number): Item | undefined {
+  itemExists(itemNumber: Number): Item | undefined {
     return this.itens.find(
       (item) => itemNumber == item.numero_item
     );
@@ -75,7 +74,7 @@ export class CadItemComponent implements OnInit {
 
     let newItem: Item = {
       numero_item: this.numItem,
-      nome: this.nome,
+      nome: this.nomeItem,
       descricao: this.desc,
       valor: this.valor,
       und_md: this.und_md
@@ -130,7 +129,7 @@ export class CadItemComponent implements OnInit {
     this.operacao = 'Editar';
 
     this.numItem = item.numero_item;
-    this.nome = item.nome;
+    this.nomeItem = item.nome;
     this.desc = item.descricao;
     this.valor = item.valor;
     this.und_md = item.und_md;
@@ -140,7 +139,7 @@ export class CadItemComponent implements OnInit {
 
   clearForm() {
     this.numItem = 0;
-    this.nome = '';
+    this.nomeItem = 'Teste';
     this.desc = '';
     this.valor = 0;
     this.und_md = 'N/A';
@@ -168,4 +167,5 @@ export class CadItemComponent implements OnInit {
   disableInfoBox() {
     this.divInfo.nativeElement.classList.add('opacity-0');
   }
+
 }

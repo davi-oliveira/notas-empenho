@@ -116,6 +116,8 @@ export class CadContratoComponent implements OnInit {
       this.divCont.nativeElement.classList.add('d-none');
       this.tableConts.nativeElement.classList.remove('transparencia');
       this.btnsCont.nativeElement.classList.remove('d-none');
+      this.inputNumCont.nativeElement.classList.remove('is-invalid');
+      this.anoCont.nativeElement.classList.remove('is-invalid');
       this.operacao = "Cadastrar";
       this.inputNumCont.nativeElement.disabled = false;
       this.clearForm();

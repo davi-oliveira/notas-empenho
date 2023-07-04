@@ -56,39 +56,40 @@
     <div class="d-none text-white position-absolute w-100 h-100 d-flex justify-content-center align-items-center"
         style="top: 15px" #divItem>
         <form
-            class="text-black d-flex flex-column align-items-center justify-content-center shadow-sm bg-white rounded col-10 col-sm-10 col-md-6 col-lg-4 col-xl-4"
-            style="min-width: 22vw; min-height: 63vh">
-            <h3 class="mb-4 font-weight-bold">{{operacao}} Item</h3>
-            <div class="mb-3 d-flex flex-column align-items-center">
-                <label  for="" class="form-label">Número do Item:</label>
+            class="text-black d-flex flex-column align-items-center justify-content-around p-3 shadow bg-white rounded col-10 col-sm-9 col-md-7 col-lg-6 col-xl-5"
+            style="min-width: 22vw; min-height: 73vh;">
+            <h3 class="font-weight-bold">{{operacao}} Item</h3>
+            <div class="d-flex flex-column align-items-center">
+                <label for="" class="form-label">Número do Item:</label>
                 <input type="number" [(ngModel)]="numItem" id="validationNumCont" name="numCont" class="form-control"
-                    aria-describedby="emailHelp" (blur)="validNumItem()" #inputNumCont />
+                    aria-describedby="emailHelp" (blur)="validNumItem()" #inputNumItem>
                 <div id="validationNumCont" class="invalid-feedback">
                     Item já existe
                 </div>
             </div>
-            <div class="mb-3 d-flex flex-column align-items-center">
+            <div class="d-flex flex-column align-items-center">
                 <label for="nomeItem" class="form-label">Nome:</label>
-                <input type="text" [(ngModel)]="nome" id="nomeItem" name="numItem" class="form-control" />
+                <input type="text" [(ngModel)]="nomeItem" id="nomeItem" name="nomeItem" class="form-control" />
             </div>
-            <div class="mb-3 d-flex flex-column align-items-center">
+            <div class="d-flex flex-column align-items-center">
                 <label for="inputDescItem" class="form-label">Descrição:</label>
                 <div class="form-floating">
                     <textarea [(ngModel)]="desc" name="desc" class="form-control" placeholder="Leave a comment here"
                         id="inputDescItem"></textarea>
                 </div>
             </div>
-            <div class="mb-3 d-flex flex-column align-items-center">
+            <div class="d-flex flex-column align-items-center">
                 <label for="nomeItem" class="form-label">Und/md:</label>
-                <input type="text" [(ngModel)]="nome" id="nomeItem" name="numItem" class="form-control" />
+                <input type="text" [(ngModel)]="und_md" id="undMd" name="undMd" class="form-control" />
             </div>
-            <div class="mb-3 d-flex flex-column align-items-center">
+            <div class="d-flex flex-column align-items-center">
                 <label for="valorItem" class="form-label">Valor:</label>
-                <input type="number" [(ngModel)]="valor" id="valorItem" class="form-control" />
+                <input type="number" [(ngModel)]="valor" id="valorItem" name="valor" class="form-control" />
             </div>
+
             <div class="d-flex justify-content-center" style="bottom: 50px;">
                 <button type="button" (click)="cadastrar()"
-                    class="btn btn-outline-primary mt-3 float-right text-right shadow-sm">
+                    class="btn btn-outline-primary float-right text-right shadow-sm" id="btnCadastro">
                     {{operacao}}
                 </button>
             </div>

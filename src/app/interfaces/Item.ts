@@ -1,5 +1,5 @@
 export interface Item{
-    numero_item: number,
+    numero_item: Number,
     nome: String,
     descricao: String,
     valor: Number,

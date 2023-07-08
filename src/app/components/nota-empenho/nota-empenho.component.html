@@ -54,7 +54,7 @@
         style="top: 15px" #divNota>
         <form
             class="text-black d-flex flex-column align-items-center justify-content-around p-3 shadow bg-white rounded col-8 col-sm-8 col-md-6 col-lg-5 col-xl-4"
-            style="min-width: 22vw; min-height: 50vh;">
+            style="min-width: 22vw; min-height: 65vh;">
             <h3 class="font-weight-bold">{{operacao}} Nota</h3>
             <div class="d-flex flex-column align-items-center">
                 <label for="" class="form-label">Número da Nota:</label>
@@ -75,7 +75,13 @@
                 <label for="valorNota" class="form-label">Ano:</label>
                 <input type="number" [(ngModel)]="ano" id="valorNota" name="valor" class="form-control" />
             </div>
-
+            <div class="input-group mb-3 d-flex flex-column align-items-center">
+                <label for="contratoId" class="form-label">Contrato:</label>
+                <select class="form-select" id="contratoId" style="min-width: 15vw;" #inputOptionCto>
+                  <option selected>Escolha...</option>
+                  <option *ngFor="let contrato of contratos" [value]="contrato.numero_contrato">{{contrato.numero_contrato}}</option>
+                </select>
+              </div>
             <div class="d-flex justify-content-center" style="bottom: 50px;">
                 <button type="button" (click)="cadastrar()"
                     class="btn btn-outline-primary float-right text-right shadow-sm" id="btnCadastro">

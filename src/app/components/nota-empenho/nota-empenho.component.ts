@@ -1,5 +1,6 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ListService } from 'src/app/services/nota-empenho/list.service';
+import { ListService as ContratoListService } from 'src/app/services/contratos-service/list.service';
 import { NotaEmpenho } from 'src/app/interfaces/NotaEmpenho';
 import { Contrato } from 'src/app/interfaces/Contrato';
 
@@ -11,11 +12,12 @@ import { Contrato } from 'src/app/interfaces/Contrato';
 export class NotaEmpenhoComponent implements OnInit {
   ngOnInit(): void { }
 
-  constructor(private listService: ListService) {
+  constructor(private listService: ListService, private ctnListService: ContratoListService) {
     this.getNotas();
   }
 
   notas: NotaEmpenho[] = [];
+  contratos: Contrato[] = [];
 
   numNota: Number = 0;
   desc: String = '';
@@ -24,7 +26,7 @@ export class NotaEmpenhoComponent implements OnInit {
 
   operacao: String = 'Cadastrar';
   lastInfo: any = { message: '', icon: '' };
-  
+
   //-------------- Elementos DOM ---------//
   @ViewChild('divNota', { static: false })
   divNota!: ElementRef;
@@ -43,6 +45,9 @@ export class NotaEmpenhoComponent implements OnInit {
 
   @ViewChild('iconMsg', { static: false })
   iconMsg!: ElementRef;
+
+  @ViewChild('inputOptionCto', { static: false })
+  inputOptionCto!: ElementRef;
 
   //--------------- Validações ---------------//
   validNumNota() {
@@ -67,7 +72,9 @@ export class NotaEmpenhoComponent implements OnInit {
       .getNotas()
       .subscribe((notas) => (this.notas = notas));
 
-      console.log(this.notas);
+    this.ctnListService
+      .getCtn()
+      .subscribe((contratos) => (this.contratos = contratos));
   }
 
   cadastrar() {

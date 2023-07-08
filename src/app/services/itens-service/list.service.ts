@@ -2,13 +2,14 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Item } from '../../interfaces/Item';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ListService {
 
-  apiUrl = "http://10.133.1.41:8080/itens"
+  apiUrl = `${environment.apiURL}/contratos`
 
   constructor(private http: HttpClient) { }
 

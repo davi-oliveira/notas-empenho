@@ -9,7 +9,7 @@ import { environment } from 'src/environments/environment';
 })
 export class ListService {
 
-  apiUrl = `${environment.apiURL}/contratos`
+  apiUrl = `${environment.apiURL}/itens`
 
   constructor(private http: HttpClient) { }
 

@@ -1,42 +1,90 @@
-<h5>Cadastrar Nota de Empenho</h5>
-<form id="formCadContrato">
-  <div class="mb-3">
-    <label for="inputNumContrato" class="form-label">Número:</label>
-    <input
-      type="number"
-      class="form-control input-numero-contrato"
-      id="inputNumContrato"
-      aria-describedby="emailHelp"
-    />
-  </div>
-  <div class="mb-3">
-    <label for="inputNumContrato" class="form-label">Descrição:</label>
-    <div class="form-floating">
-      <textarea
-        class="form-control"
-        placeholder="Leave a comment here"
-        id="floatingTextarea"
-      ></textarea>
-      <label for="floatingTextarea">Digite aqui...</label>
+<div class="page position-relative" style="min-height: 70vh">
+
+    <!---------------------  LISTAGEM --------------------------->
+    <div class="d-flex justify-content-between mt-3">
+        <div class="alert alert-danger opacity-0" role="alert" #divInfo>
+            <box-icon [attr.name]="lastInfo.icon" class="me-1" #iconMsg></box-icon><span
+                [innerHTML]="lastInfo.message"></span>
+        </div>
+
+        <div class="buttons" #btnsNota style="max-width: 67.5vw;">
+            <button type="button" class="btn btn-outline-secondary float-end ms-1" (click)="getNotas()">
+                Atualizar
+            </button>
+            <button type="button" class="btn btn-outline-primary shadow-sm ms-2 float-end" (click)="openCadNota()">
+                Cadastrar
+            </button>
+        </div>
     </div>
-  </div>
-  <div class="mb-3">
-    <label for="inputNumContrato" class="form-label">Ano:</label>
-    <input
-      type="number"
-      class="form-control input-numero-contrato"
-      id="inputNumContrato"
-      aria-describedby="emailHelp"
-    />
-  </div>
-  <div class="mb-3">
-    <label for="inputNumContrato" class="form-label">Contrato ID:</label>
-    <input
-      type="number"
-      class="form-control input-numero-contrato"
-      id="inputNumContrato"
-      aria-describedby="emailHelp"
-    />
-  </div>
-  <button type="submit" class="btn btn-primary mt-3">Cadastrar</button>
-</form>
+    <!----------------------- TABELA ----------------------------->
+    <section #tableNotas>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Nº da nota</th>
+                    <th scope="col">Descricão</th>
+                    <th scope="col">Ano</th>
+                    <th scope="col">Nº do contrato</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let nota of notas">
+                    <th scope="row">{{ nota.numero }}</th>
+                    <td>{{ nota.descricao }}</td>
+                    <td>{{ nota.ano }}</td>
+                    <td>{{ nota.contrato }}</td>
+                    <td>
+                        <img style="margin-right: 10px; cursor: pointer" title="Editar" src="/assets/imgs/pencil.png"
+                            alt="Editar" (click)="editar(nota)" />
+                        <img style="cursor: pointer" title="Excluir" src="/assets/imgs/delete.png" alt="Excluir"
+                            (click)="excluir(nota)" />
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <!----------------------- TOTAL ------------------------------->
+        <p class="text-end">Total: {{notas.length}}
+            <span *ngIf="notas.length!=1">notas</span>
+            <span *ngIf="notas.length===1">nota</span>
+        </p>
+    </section>
+
+    <!------------- CARD SOBREPOSTO --------------------------->
+    <div class="d-none text-white position-absolute w-100 h-100 d-flex justify-content-center align-items-center"
+        style="top: 15px" #divNota>
+        <form
+            class="text-black d-flex flex-column align-items-center justify-content-around p-3 shadow bg-white rounded col-8 col-sm-8 col-md-6 col-lg-5 col-xl-4"
+            style="min-width: 22vw; min-height: 50vh;">
+            <h3 class="font-weight-bold">{{operacao}} Nota</h3>
+            <div class="d-flex flex-column align-items-center">
+                <label for="" class="form-label">Número da Nota:</label>
+                <input type="number" [(ngModel)]="numNota" id="validationNumCont" name="numCont" class="form-control"
+                    aria-describedby="emailHelp" (blur)="validNumNota()" #inputNumNota>
+                <div id="validationNumCont" class="invalid-feedback">
+                    Nota já existe
+                </div>
+            </div>
+            <div class="d-flex flex-column align-items-center">
+                <label for="inputDescItem" class="form-label">Descrição:</label>
+                <div class="form-floating">
+                    <textarea [(ngModel)]="desc" name="desc" class="form-control" placeholder="Leave a comment here"
+                        id="inputDescItem"></textarea>
+                </div>
+            </div>
+            <div class="d-flex flex-column align-items-center">
+                <label for="valorNota" class="form-label">Ano:</label>
+                <input type="number" [(ngModel)]="ano" id="valorNota" name="valor" class="form-control" />
+            </div>
+
+            <div class="d-flex justify-content-center" style="bottom: 50px;">
+                <button type="button" (click)="cadastrar()"
+                    class="btn btn-outline-primary float-right text-right shadow-sm" id="btnCadastro">
+                    {{operacao}}
+                </button>
+            </div>
+        </form>
+
+        <img src="/assets/imgs/delete.png" alt="" srcset=""
+            style="position: absolute; top: 5px; right: 5px; cursor: pointer" (click)="closeCadNota()" />
+    </div>
+</div>

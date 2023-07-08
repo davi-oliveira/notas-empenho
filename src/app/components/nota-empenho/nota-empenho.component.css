@@ -1,9 +1,44 @@
-h5{
-    margin-top: 20px;
-    margin-bottom: 30px;;
-    font-weight: bold;
+@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
+
+* {
+  font-family: "Roboto", sans-serif;
 }
 
-input, label, textarea{
-    max-width: 300px;
+h5 {
+  margin-top: 20px;
+  margin-bottom: 30px;
+  font-weight: bold;
+}
+
+input,
+label,
+textarea {
+  max-width: 300px;
+}
+
+.tabEsc {
+  margin-top: 40px;
+}
+
+.transparencia {
+  opacity: 0.1;
+}
+
+.alert {
+  display: flex;
+  max-height: 42px;
+  justify-content: center;
+  align-items: center;
+}
+
+h3 {
+  font-size: 2rem;
+}
+
+label {
+  font-size: 1.1rem;
+}
+
+#btnCadastro {
+  font-size: 1.3rem;
 }

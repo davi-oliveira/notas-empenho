@@ -7,9 +7,9 @@ import { Item } from 'src/app/interfaces/Item';
   templateUrl: './cad-item.component.html',
   styleUrls: ['./cad-item.component.css']
 })
+
 export class CadItemComponent implements OnInit {
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   constructor(private listService: ListService) {
     this.getItens();
@@ -139,7 +139,7 @@ export class CadItemComponent implements OnInit {
 
   clearForm() {
     this.numItem = 0;
-    this.nomeItem = 'Teste';
+    this.nomeItem = '';
     this.desc = '';
     this.valor = 0;
     this.und_md = 'N/A';

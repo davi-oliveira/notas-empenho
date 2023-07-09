@@ -30,7 +30,8 @@
             </thead>
             <tbody>
                 <tr *ngFor="let nota of notas">
-                    <th scope="row"><a (click)="infoItem()" class="clickItem" title="Cadastrar Itens" routerLink="/itemNotaEmpenho">{{ nota.numero }}</a></th>
+                    <!-- <th scope="row"><a (click)="infoItem()" class="clickItem" title="Cadastrar Itens" routerLink="/itemNotaEmpenho" [routerLink]="['/itemNotaEmpenho', nota.numero]">{{ nota.numero }}</a></th> -->
+                    <th scope="row"><a (click)="infoItem()" class="clickItem" title="Cadastrar Itens" [routerLink]="['/itemNotaEmpenho', nota.numero]">{{ nota.numero }}</a></th>
                     <td>{{ nota.descricao }}</td>
                     <td>{{ nota.ano }}</td>
                     <td>{{ nota.numero_contrato }}</td>

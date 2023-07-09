@@ -16,7 +16,7 @@ const routes: Routes = [
   {path: 'cadNotaEmpenho', component: NotaEmpenhoComponent},
   {path: 'notaEmpenhoOM', component: NotaEmpenhoOmComponent},
   {path: 'utilizacaoEmpenho', component: UtilizacaoEmpenhoComponent},
-  {path: 'itemNotaEmpenho', component: ItemNotaEmpenhoComponent}
+  {path: 'itemNotaEmpenho/:notaId', component: ItemNotaEmpenhoComponent}
 ];
 
 @NgModule({

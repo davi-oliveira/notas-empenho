@@ -84,7 +84,7 @@ export class NotaEmpenhoComponent implements OnInit {
       numero: this.numNota,
       descricao: this.desc,
       ano: this.ano,
-      contrato: this.contrato
+      numero_contrato: this.inputOptionCto.nativeElement.value
     };
 
     if (this.operacao == 'Cadastrar') {
@@ -110,7 +110,7 @@ export class NotaEmpenhoComponent implements OnInit {
     });
   }
 
-  closeCadNota() {
+  closeCadNota() { 
     setTimeout(() => {
       this.divNota.nativeElement.classList.add('d-none');
       this.tableNotas.nativeElement.classList.remove('transparencia');
@@ -138,9 +138,13 @@ export class NotaEmpenhoComponent implements OnInit {
     this.numNota = nota.numero;
     this.desc = nota.descricao;
     this.ano = nota.ano;
-    this.contrato = nota.contrato;
+    this.inputOptionCto.nativeElement.value = nota.numero_contrato;
 
     this.inputNumNota.nativeElement.disabled = true;
+  }
+
+  infoItem(){
+    console.log('info do item')
   }
 
   clearForm() {

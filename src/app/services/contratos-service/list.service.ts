@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Contrato } from '../../interfaces/Contrato';
 import { environment } from 'src/environments/environment';
@@ -9,9 +9,9 @@ import { environment } from 'src/environments/environment';
 })
 export class ListService {
 
-  apiUrl = `${environment.apiURL}/contratos`
-
   constructor(private http: HttpClient) { }
+
+  apiUrl = `${environment.apiURL}/contratos`
 
   getCtn(): Observable<Contrato[]> {
     return this.http.get<Contrato[]>(this.apiUrl + '?ordem=numero_contrato')

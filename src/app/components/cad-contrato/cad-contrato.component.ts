@@ -7,6 +7,7 @@ import { Contrato } from 'src/app/interfaces/Contrato';
   templateUrl: './cad-contrato.component.html',
   styleUrls: ['./cad-contrato.component.css'],
 })
+
 export class CadContratoComponent implements OnInit {
   ngOnInit(): void { }
 

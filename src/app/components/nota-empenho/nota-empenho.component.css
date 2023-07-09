@@ -43,3 +43,16 @@ label {
 #btnCadastro {
   font-size: 1.3rem;
 }
+
+a{
+  cursor: pointer;
+  transition: .4s;
+  text-decoration: none;
+  color: black;
+  font-weight: bold;
+}
+
+
+a:hover{
+  color: rgba(0, 0, 1, 0.5);
+}

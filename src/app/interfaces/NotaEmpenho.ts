@@ -2,5 +2,5 @@ export interface NotaEmpenho{
     numero: Number;
     descricao: String;
     ano: Number;
-    contrato: Number;
+    numero_contrato: Number;
 }

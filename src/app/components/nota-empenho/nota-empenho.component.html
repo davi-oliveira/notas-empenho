@@ -25,14 +25,15 @@
                     <th scope="col">Descricão</th>
                     <th scope="col">Ano</th>
                     <th scope="col">Nº do contrato</th>
+                    <th scope="col">Operação</th>
                 </tr>
             </thead>
             <tbody>
                 <tr *ngFor="let nota of notas">
-                    <th scope="row">{{ nota.numero }}</th>
+                    <th scope="row"><a (click)="infoItem()" class="clickItem" title="Cadastrar Itens" routerLink="/itemNotaEmpenho">{{ nota.numero }}</a></th>
                     <td>{{ nota.descricao }}</td>
                     <td>{{ nota.ano }}</td>
-                    <td>{{ nota.contrato }}</td>
+                    <td>{{ nota.numero_contrato }}</td>
                     <td>
                         <img style="margin-right: 10px; cursor: pointer" title="Editar" src="/assets/imgs/pencil.png"
                             alt="Editar" (click)="editar(nota)" />
@@ -53,7 +54,7 @@
     <div class="d-none text-white position-absolute w-100 h-100 d-flex justify-content-center align-items-center"
         style="top: 15px" #divNota>
         <form
-            class="text-black d-flex flex-column align-items-center justify-content-around p-3 shadow bg-white rounded col-8 col-sm-8 col-md-6 col-lg-5 col-xl-4"
+            class="text-black d-flex flex-column align-items-center justify-content-around p-3 shadow bg-white rounded col-9 col-sm-9 col-md-6 col-lg-5 col-xl-4"
             style="min-width: 22vw; min-height: 65vh;">
             <h3 class="font-weight-bold">{{operacao}} Nota</h3>
             <div class="d-flex flex-column align-items-center">
@@ -77,8 +78,8 @@
             </div>
             <div class="input-group mb-3 d-flex flex-column align-items-center">
                 <label for="contratoId" class="form-label">Contrato:</label>
-                <select class="form-select" id="contratoId" style="min-width: 15vw;" #inputOptionCto>
-                  <option selected>Escolha...</option>
+                <select class="form-select" id="contratoId" style="min-width: 15em;" #inputOptionCto>
+                  <option>Escolha...</option>
                   <option *ngFor="let contrato of contratos" [value]="contrato.numero_contrato">{{contrato.numero_contrato}}</option>
                 </select>
               </div>

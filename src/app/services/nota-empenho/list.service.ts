@@ -23,13 +23,14 @@ export class ListService {
   }
 
   editNota(dados: NotaEmpenho){
+    console.log("Atualizando para: " + dados)
     this.http.put<NotaEmpenho>(this.apiUrl, dados).subscribe(erro => {
       if(erro) console.log(erro)
     })
   }
 
   deleteNota(dados: NotaEmpenho){
-    this.http.delete<NotaEmpenho>(this.apiUrl + '/delete/' + dados.contrato).subscribe(erro => {
+    this.http.delete<NotaEmpenho>(this.apiUrl + '/delete/' + dados.numero).subscribe(erro => {
       if(erro) console.log(erro)
     })
   }

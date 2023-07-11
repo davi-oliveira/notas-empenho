@@ -1,10 +1,12 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { ListService } from 'src/app/services/item-nota/list.service';
+
 import { ListService as ItemService } from 'src/app/services/itens-service/list.service';
+
 import { ActivatedRoute } from '@angular/router';
 import { Item } from 'src/app/interfaces/Item';
 import { ItemNota } from 'src/app/interfaces/ItemNota';
-import { NotaEmpenho } from 'src/app/interfaces/NotaEmpenho';
+
 
 @Component({
   selector: 'app-item-nota-empenho',
@@ -14,9 +16,13 @@ import { NotaEmpenho } from 'src/app/interfaces/NotaEmpenho';
 export class ItemNotaEmpenhoComponent implements OnInit {
   id: Number = 0;
   nota: Number = 0;
-
   itemNotas: ItemNota[] = [];
+  
+  
   itens: Item[] = [];
+  
+
+  operacao: String = 'Adicionar';
 
   qtdEmpenho!: Number;
 
@@ -36,10 +42,10 @@ export class ItemNotaEmpenhoComponent implements OnInit {
   selectItem!: ElementRef;
 
   //---------------- Operações --------------------//
-  getItemNotas(): void{
+  getItemNotas(): void {
     this.listService
       .getItensNota()
-      .subscribe((itemNotas) => (this.itemNotas = itemNotas))
+      .subscribe((itemNotas) => (this.itemNotas = itemNotas.filter((itemNota) => itemNota.empenho_numero == this.nota)))
   }
   getItens(): void {
     this.itemListService
@@ -47,13 +53,13 @@ export class ItemNotaEmpenhoComponent implements OnInit {
       .subscribe((itens) => (this.itens = itens));
   }
 
-  searchItem(numero: Number): Item | undefined{
+  searchItem(numero: Number): Item | undefined {
     return this.itens.find((item) => item.numero_item == numero)
   }
 
-  cadItemInNota(){
-    if(this.selectItem.nativeElement.value == "no-selected") return;
-    
+  cadItemInNota() {
+    if (this.selectItem.nativeElement.value == "no-selected") return;
+
     console.log("item cadastrado" + this.selectItem.nativeElement.value)
 
     let itemToCad: ItemNota = {
@@ -62,10 +68,21 @@ export class ItemNotaEmpenhoComponent implements OnInit {
       item_numero: this.selectItem.nativeElement.value,
       qtd_empenho: this.qtdEmpenho
     }
+
+
+    if (this.operacao == 'Adicionar') {
+      this.listService.cadItemNota(itemToCad);       
+    }
+    else if (this.operacao == 'Editar') {
+      this.listService.editItemNota(itemToCad); 
+    }
+
+    setTimeout(() => this.getItemNotas(), 500); 
+    this.clearForm();
   }
 
-  excluir(itemNota: ItemNota){
-    if(itemNota){
+  excluir(itemNota: ItemNota) {
+    if (itemNota) {
       this.listService.deleteItemNota(itemNota);
       setTimeout(() => {
         this.getItemNotas();
@@ -73,8 +90,20 @@ export class ItemNotaEmpenhoComponent implements OnInit {
     }
   }
 
-  editar(itemNota: ItemNota){
+  editar(itemNota: ItemNota) {
+    this.operacao = 'Editar'
     this.selectItem.nativeElement.value = itemNota.item_numero;
+    this.id = Number(itemNota.id);
     this.qtdEmpenho = itemNota.qtd_empenho;
+  }
+
+  cancelarEdicao(){
+    this.operacao = 'Adicionar'
+    this.clearForm()
+  }
+
+  clearForm(){
+    this.selectItem.nativeElement.value = "no-selected";
+    this.qtdEmpenho = 0;
   }
 }

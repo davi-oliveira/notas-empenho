@@ -1,4 +1,5 @@
 <p class="mt-3" style="text-align: center; font-size: 1.3em;">Nota de Empenho nº <strong>{{nota}}</strong></p>
+<p class="mt-2" style="text-align: center; font-size: 1.3em;">Itens incluidos</p>
 <div class="itens d-flex flex-row justify-content-center align-items-center mt-3">
   <select class="form-select me-3" aria-label="Selecione o item" style="max-width: 20vw;" #selectItem>
     <option selected value="no-selected">Selecione o item</option>
@@ -11,7 +12,9 @@
   </div>
 
 
-  <button type="button" class="btn btn-outline-success" (click)="cadItemInNota()">Adicionar</button>
+  <button type="button" class="btn btn-outline-success" (click)="cadItemInNota()">{{operacao}}</button>
+  <button type="button" class="btn btn-outline-warning ms-1" (click)="cancelarEdicao()" *ngIf="operacao == 'Editar'">Cancelar Edição</button>
+  <button type="button" class="btn btn-outline-secondary ms-1" (click)="cadItemInNota()">Atualizar</button>
 
 </div>
 <!----------------------- TABELA ----------------------------->
@@ -45,3 +48,5 @@
     <span *ngIf="itemNotas.length===1">item incluido na nota</span>
   </p>
 </section>
+
+<app-nota-empenho-om></app-nota-empenho-om>

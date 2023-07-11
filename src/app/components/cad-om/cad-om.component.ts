@@ -87,8 +87,12 @@ export class CadOMComponent implements OnInit {
 
   openCadOm() {
     setTimeout(() => {
-      if(this.operacao != 'Editar')
-        this.idOm = Number(this.om[this.om.length-1].id)+1;
+      if(this.operacao != 'Editar'){
+        if(this.om.length != 0)
+          this.idOm = Number(this.om[this.om.length-1].id)+1;
+        
+        else this.idOm = 1;
+      }
 
       this.disableInfoBox();
       this.divOm.nativeElement.classList.remove('d-none');

@@ -1,23 +1,49 @@
-<h5>Cadastrar OM em Nota de Empenho</h5>
-<form id="formCadContrato">
-  <div class="mb-3">
-    <label for="inputNumContrato" class="form-label">Número do Empenho:</label>
-    <input
-      type="number"
-      class="form-control input-numero-contrato"
-      id="inputNumContrato"
-      aria-describedby="emailHelp"
-    />
-  </div>
-  <div class="mb-3">
-    <label for="inputNumContrato" class="form-label">ID da OM:</label>
-    <input
-      type="number"
-      class="form-control input-numero-contrato"
-      id="inputNumContrato"
-      aria-describedby="emailHelp"
-    />
+<!-------------------------- OMS   ------------------------------->
+<p class="mt-4 pt-3" style="text-align: center; font-size: 1.3em; border-top: 1px solid gray;">OM participantes</p>
+<div class="itens d-flex flex-row justify-content-center align-items-center mt-3">
+  <select class="form-select me-3" aria-label="Selecione o item" style="max-width: 14vw;" #selectItem>
+    <option selected value="no-selected">Selecione a OM</option>
+    <option *ngFor="let omU of om " value="{{omU.id}}">{{omU.nome}}</option>
+  </select>
+
+  <div>
+    <input type="number" [(ngModel)]="qtdUtilizada" id="valorItem" name="valor" class="form-control me-3"
+      style="max-width: 10vw; min-height: 3vh; margin-top: 0px;" placeholder="Qtd Utilizada" />
   </div>
 
-  <button type="submit" class="btn btn-primary mt-3">Cadastrar</button>
-</form>
+  <button type="button" class="btn btn-outline-success" (click)="cadOmInNota()">{{operacao}}</button>
+  <button type="button" class="btn btn-outline-warning ms-1" (click)="cancelarEdicao()" *ngIf="operacao == 'Editar'">Cancelar Edição</button>
+  <button type="button" class="btn btn-outline-secondary ms-1" (click)="getNotasOm()">Atualizar</button>
+
+</div>
+<!----------------------- TABELA ----------------------------->
+<section #tableNotas>
+  <table class="table mt-4">
+    <thead>
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">OM</th>
+        <th scope="col">Qtd Utilizada</th>
+        <th scope="col">Operação</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let notaOm of notasOm">
+        <th scope="row">{{ notaOm.om_id }}</th>
+        <th scope="row">{{ searchOm(notaOm.om_id)?.nome }}</th>
+        <th scope="row">{{ notaOm.id }}</th>
+        <td>
+          <img style="margin-right: 10px; cursor: pointer" title="Editar" src="/assets/imgs/pencil.png" alt="Editar"
+            (click)="editar(notaOm)" />
+          <img style="cursor: pointer" title="Excluir" src="/assets/imgs/delete.png" alt="Excluir"
+            (click)="excluir(notaOm)" />
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <!----------------------- TOTAL ------------------------------->
+  <p class="text-end">Total: {{om.length}}
+    <span *ngIf="om.length!=1">OM incluidas na nota</span>
+    <span *ngIf="om.length===1">OM incluida na nota</span>
+  </p>
+</section>

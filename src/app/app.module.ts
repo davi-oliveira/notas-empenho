@@ -14,6 +14,7 @@ import { NotaEmpenhoComponent } from './components/nota-empenho/nota-empenho.com
 import { NotaEmpenhoOmComponent } from './components/nota-empenho-om/nota-empenho-om.component';
 import { UtilizacaoEmpenhoComponent } from './components/utilizacao-empenho/utilizacao-empenho.component';
 import { ItemNotaEmpenhoComponent } from './components/item-nota-empenho/item-nota-empenho.component';
+import { LoginComponent } from './components/login/login.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { ItemNotaEmpenhoComponent } from './components/item-nota-empenho/item-no
     NotaEmpenhoComponent,
     NotaEmpenhoOmComponent,
     UtilizacaoEmpenhoComponent,
-    ItemNotaEmpenhoComponent
+    ItemNotaEmpenhoComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,

@@ -5,5 +5,3 @@ services:
     image: davirdoliveira/notas-empenho:2.0
     ports:
       - 80:80
-    environment:
-      - API_URL=10.166.68.96:8080

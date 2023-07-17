@@ -14,6 +14,10 @@ input, label, textarea{
     max-width: 300px;
 }
 
+select{
+    min-width: 14.5vw;
+}
+
 .tabEsc{
     margin-top: 40px;
 }

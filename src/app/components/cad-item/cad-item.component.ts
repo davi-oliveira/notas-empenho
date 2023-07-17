@@ -21,7 +21,7 @@ export class CadItemComponent implements OnInit {
   nomeItem: String = '';
   desc: String = '';
   valor: Number = 0;
-  und_md: String = 'N/A';
+  und_md: String = 'unselect';
 
   operacao: String = 'Cadastrar';
   lastInfo: any = { message: '', icon: '' };
@@ -72,6 +72,7 @@ export class CadItemComponent implements OnInit {
   cadastrar() {
     if (this.operacao == 'Cadastrar' && !this.validNumItem()) return;
 
+
     let newItem: Item = {
       numero_item: this.numItem,
       nome: this.nomeItem,
@@ -79,6 +80,8 @@ export class CadItemComponent implements OnInit {
       valor: this.valor,
       und_md: this.und_md
     };
+
+    console.log(newItem)
 
     if (this.operacao == 'Cadastrar') {
       this.listService.cadItem(newItem.descricao != '' ? newItem : { ...newItem, descricao: 'N/D' }); //se a descrição estiver vazia envia um "N/D"
@@ -142,7 +145,7 @@ export class CadItemComponent implements OnInit {
     this.nomeItem = '';
     this.desc = '';
     this.valor = 0;
-    this.und_md = 'N/A';
+    this.und_md = 'unselect';
   }
 
   activeInfoBox(message: String, type: "delete" | "edit" | "new", icon: String) {

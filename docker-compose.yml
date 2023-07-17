@@ -2,7 +2,7 @@ version: '3.4'
 
 services:
   notasempenho:
-    image: davirdoliveira/notas-empenho:1.0
+    image: davirdoliveira/notas-empenho:2.0
     ports:
       - 80:80
     environment:

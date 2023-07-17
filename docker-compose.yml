@@ -2,6 +2,10 @@ version: '3.4'
 
 services:
   notasempenho:
-    image: davirdoliveira/notas-empenho:1.0
+    build: 
+      context: .
+      dockerfile: Dockerfile
     ports:
       - 80:80
+    environment:
+      - API_URL=10.166.68.96:8080

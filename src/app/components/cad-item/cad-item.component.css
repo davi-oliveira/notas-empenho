@@ -15,11 +15,16 @@ input, label, textarea{
 }
 
 select{
-    min-width: 14.5vw;
+    width: 227px;
 }
 
 .tabEsc{
     margin-top: 40px;
+}
+
+#divCadItem{
+    height: 85vh;
+    width: 100%;
 }
 
 .transparencia{

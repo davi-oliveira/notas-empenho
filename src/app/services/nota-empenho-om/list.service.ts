@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { NotaOM } from 'src/app/interfaces/NotaOM';
+import { Utilizacao } from 'src/app/interfaces/Utilizacao';
 
 
 @Injectable({
@@ -12,28 +13,28 @@ export class ListService {
 
   constructor(private http: HttpClient) { }
 
-  apiUrl = `${environment.apiURL}/notaOM`
+  apiUrl = `${environment.apiURL}/utilizacao`
 
-  getNotaOm(): Observable<NotaOM[]> {
-    return this.http.get<NotaOM[]>(this.apiUrl)
+  getNotaOm(): Observable<Utilizacao[]> {
+    return this.http.get<Utilizacao[]>(this.apiUrl)
   }
 
-  cadNotaOm(dados: NotaOM) {
-    this.http.post<NotaOM>(this.apiUrl, dados).subscribe(erro => {
+  cadNotaOm(dados: Utilizacao) {
+    this.http.post<Utilizacao>(this.apiUrl, dados).subscribe(erro => {
       if (erro)
         console.log(erro)
     })
   }
 
-  editNotaOm(dados: NotaOM) {
-    this.http.put<NotaOM>(this.apiUrl, dados).subscribe(erro => {
+  editNotaOm(dados: Utilizacao) {
+    this.http.put<Utilizacao>(this.apiUrl, dados).subscribe(erro => {
       if (erro)
         console.log(erro)
     })
   }
 
-  deleteNotaOm(dados: NotaOM) {
-    this.http.delete<NotaOM>(this.apiUrl + '/delete/' + dados.id).subscribe(erro => {
+  deleteNotaOm(dados: Utilizacao) {
+    this.http.delete<Utilizacao>(this.apiUrl + '/delete/' + dados.id).subscribe(erro => {
       if (erro)
         console.log(erro)
     })

@@ -1,9 +1,9 @@
 <p class="mt-3" style="text-align: center; font-size: 1.3em;">Nota de Empenho nº <strong>{{nota}}</strong></p>
 <p class="mt-2" style="text-align: center; font-size: 1.3em;">Itens incluidos</p>
 <div class="itens d-flex flex-row justify-content-center align-items-center mt-3">
-  <select class="form-select me-3" aria-label="Selecione o item" style="max-width: 20vw;" #selectItem>
+  <select class="form-select me-3" aria-label="Selecione o item" style="max-width: 13vw;" #selectItem>
     <option selected value="no-selected">Selecione o item</option>
-    <option *ngFor="let item of itens" value="{{item.numero_item}}">{{item.nome}}</option>
+    <option *ngFor="let item of itens" value="{{item.numero_item}}">{{item.numero_item}} - {{item.nome}}</option>
   </select>
 
   <div>
@@ -22,9 +22,9 @@
   <table class="table mt-4">
     <thead>
       <tr>
-        <th scope="col">Nº do item</th>
-        <th scope="col">Nome</th>
-        <th scope="col">Qtd Empenho</th>
+        <th scope="col" class="col-3">Nº do item</th>
+        <th scope="col" class="col-4">Nome</th>
+        <th scope="col" class="col-3">Qtd Empenho</th>
         <th scope="col">Operação</th>
       </tr>
     </thead>
@@ -43,9 +43,9 @@
     </tbody>
   </table>
   <!----------------------- TOTAL ------------------------------->
-  <p class="text-end">Total: {{itemNotas.length}}
-    <span *ngIf="itemNotas.length!=1">itens incluidos na nota</span>
-    <span *ngIf="itemNotas.length===1">item incluido na nota</span>
+  <p class="text-end">Total: <strong>{{itemNotas.length}} </strong>
+    <span *ngIf="itemNotas.length!=1">itens incluidos no empenho</span>
+    <span *ngIf="itemNotas.length===1">item incluido no empenho</span>
   </p>
 </section>
 

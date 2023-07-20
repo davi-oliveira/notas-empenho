@@ -2,6 +2,6 @@ export interface Item{
     numero_item: Number,
     nome: String,
     descricao: String,
-    valor: Number,
+    valor: string,
     und_md: String
 }

@@ -20,7 +20,7 @@ export class CadItemComponent implements OnInit {
   numItem: Number = 0;
   nomeItem: String = '';
   desc: String = '';
-  valor: Number = 0;
+  valor: string = '0';
   und_md: String = 'unselect';
 
   operacao: String = 'Cadastrar';
@@ -54,6 +54,10 @@ export class CadItemComponent implements OnInit {
       this.inputNumItem.nativeElement.classList.remove('is-invalid');
       return true;
     }
+  }
+
+  itemValue(item: Item){ //deixar o valor do item com 2 casas decimais
+    return parseFloat(item.valor).toFixed(2)
   }
 
   itemExists(itemNumber: Number): Item | undefined {
@@ -144,7 +148,7 @@ export class CadItemComponent implements OnInit {
     this.numItem = 0;
     this.nomeItem = '';
     this.desc = '';
-    this.valor = 0;
+    this.valor = '0';
     this.und_md = 'unselect';
   }
 

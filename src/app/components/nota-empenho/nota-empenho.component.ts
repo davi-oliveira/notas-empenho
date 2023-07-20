@@ -143,10 +143,6 @@ export class NotaEmpenhoComponent implements OnInit {
     this.inputNumNota.nativeElement.disabled = true;
   }
 
-  infoItem(){
-    console.log('info do item')
-  }
-
   clearForm() {
     this.numNota = 0;
     this.desc = '';

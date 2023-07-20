@@ -60,8 +60,6 @@ export class ItemNotaEmpenhoComponent implements OnInit {
   cadItemInNota() {
     if (this.selectItem.nativeElement.value == "no-selected") return;
 
-    console.log("item cadastrado" + this.selectItem.nativeElement.value)
-
     let itemToCad: ItemNota = {
       id: this.id,
       empenho_numero: this.nota,
@@ -104,6 +102,7 @@ export class ItemNotaEmpenhoComponent implements OnInit {
 
   clearForm(){
     this.selectItem.nativeElement.value = "no-selected";
+    this.operacao = 'Cadastrar'
     this.qtdEmpenho = 0;
   }
 }

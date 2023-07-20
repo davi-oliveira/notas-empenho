@@ -21,14 +21,14 @@
     <table class="table">
       <thead>
         <tr>
-          <th scope="col">ID</th>
-          <th scope="col">Nome</th>
+          <th scope="col" class="col-5">ID</th>
+          <th scope="col" class="col-6">Nome</th>
           <th scope="col">Operacação</th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let omI of om">
-          <th scope="row">{{ omI.id }}</th>
+          <th scope="row" class="col-5">{{ omI.id }}</th>
           <td>{{ omI.nome }}</td>
           <td>
             <img style="margin-right: 10px; cursor: pointer" title="Editar" src="/assets/imgs/pencil.png" alt="Editar"

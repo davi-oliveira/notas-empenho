@@ -22,8 +22,9 @@ export class NotaEmpenhoOmComponent implements OnInit {
   om_id: Number = 0;
   qtdUtilizada!: Number;
   nota_fiscal!: String;
+  item_nota_numero!: Number;
 
-  notasOm: Utilizacao[] = [];
+  utilizacaoNota: Utilizacao[] = [];
   om: OM[] = [];
   itens: Item[] = [];
   itensNota: ItemNota[] = [];
@@ -41,25 +42,26 @@ export class NotaEmpenhoOmComponent implements OnInit {
   }
 
   //-------------- Elementos DOM ---------//
-  @ViewChild('selectItem', { static: false })
-  selectItem!: ElementRef;
+  @ViewChild('selectItem', { static: false }) selectItem!: ElementRef;
 
-  @ViewChild('selectOm', { static: false })
-  selectOm!: ElementRef;
+  @ViewChild('selectOm', { static: false }) selectOm!: ElementRef;
 
+  @ViewChild('inputQtdUtilizada', { static: false }) inputQtdUtilizada!: ElementRef;
+
+  @ViewChild('inputNotaFiscal', { static: false }) inputNotaFiscal!: ElementRef;
 
   //---------------- Operações --------------------//
 
   refreshInfos(): void{
-    this.getNotasOm();
+    this.getUtilizacao();
     this.getOm();
     this.getItens();
     this.getItensNota();
   }
-  getNotasOm(): void {
+  getUtilizacao(): void {
     this.listService
       .getNotaOm()
-      .subscribe((notasOm) => (this.notasOm = notasOm))
+      .subscribe((notasOm) => (this.utilizacaoNota = notasOm))
   }
   getOm(): void {
     this.omService
@@ -112,24 +114,24 @@ export class NotaEmpenhoOmComponent implements OnInit {
   cadOmInNota() {
     if (this.selectItem.nativeElement.value == "no-selected") return;
 
-    console.log("item cadastrado" + this.selectItem.nativeElement.value)
-
-    let notaOmToCad: Utilizacao = {
+    let utilizacaoToCad: Utilizacao = {
       id: this.id,
-      item_nota_empenho_id: this.selectItem.nativeElement.value,
+      item_nota_empenho_id: this.item_nota_numero,
       qtd_utilizada: this.qtdUtilizada,
       om_id: this.selectOm.nativeElement.value,
       nota_fiscal: this.nota_fiscal
     }
 
+    console.log(utilizacaoToCad)
+
     if (this.operacao == 'Adicionar') {
-      this.listService.cadNotaOm(notaOmToCad);
+      this.listService.cadNotaOm(utilizacaoToCad);
     }
     else if (this.operacao == 'Editar') {
-      this.listService.editNotaOm(notaOmToCad);
+      this.listService.editNotaOm(utilizacaoToCad);
     }
 
-    setTimeout(() => this.getNotasOm(), 500);
+    setTimeout(() => this.getUtilizacao(), 500);
     this.clearForm();
   }
 
@@ -137,23 +139,29 @@ export class NotaEmpenhoOmComponent implements OnInit {
     if (notaOm) {
       this.listService.deleteNotaOm(notaOm);
       setTimeout(() => {
-        this.getNotasOm();
+        this.getUtilizacao();
       }, 500);
     }
   }
 
   editar(notaOm: Utilizacao) {
     this.operacao = 'Editar'
-    this.selectItem.nativeElement.value = notaOm.om_id;
     this.id = Number(notaOm.id);
-  }
+    this.item_nota_numero = notaOm.item_nota_empenho_id;
+    this.selectItem.nativeElement.value = this.searchItemNotaEmpenho(notaOm.item_nota_empenho_id)?.item_numero;
 
-  cancelarEdicao() {
-    this.operacao = 'Adicionar'
-    this.clearForm()
+
+    this.inputQtdUtilizada.nativeElement.value = notaOm.qtd_utilizada;
+    this.selectOm.nativeElement.value = Number(notaOm.om_id);
+    this.inputNotaFiscal.nativeElement.value = notaOm.nota_fiscal;
   }
 
   clearForm() {
     this.selectItem.nativeElement.value = "no-selected";
+    this.selectOm.nativeElement.value = "no-selected";
+    this.inputQtdUtilizada.nativeElement.value = 0;
+    this.inputNotaFiscal.nativeElement.value = '';
+
+    this.operacao = 'Adicionar'
   }
 }

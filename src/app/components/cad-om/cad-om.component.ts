@@ -69,7 +69,7 @@ export class CadOMComponent implements OnInit {
   cadastrar() {
     if (this.operacao == 'Cadastrar' && !this.validNomeOM()) return;
 
-    let newOm: OM = { nome: this.nomeOm };
+    let newOm: OM = { id: this.idOm, nome: this.nomeOm };
 
     if (this.operacao == 'Cadastrar') {
       this.listService.cadOm(newOm);
@@ -77,6 +77,7 @@ export class CadOMComponent implements OnInit {
     }
     else if (this.operacao == 'Editar') {
       this.listService.editOm(newOm);
+      console.log(newOm)
       this.activeInfoBox(`Contrato <strong>${newOm.nome}</strong> editada com sucesso!`, "edit", "info-circle");
     }
 

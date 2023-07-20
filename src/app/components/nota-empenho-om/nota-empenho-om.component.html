@@ -8,23 +8,23 @@
 
   <select class="form-select me-3" aria-label="Selecione o item" style="max-width: 13vw;" #selectItem>
     <option selected value="no-selected">Selecione o item</option>
-    <option *ngFor="let itemNota of itensNota " value="{{itemNota.id}}">{{getItem(itemNota.item_numero)?.numero_item}} - {{getItem(itemNota.item_numero)?.nome}}</option>
+    <option *ngFor="let itemNota of itensNota " value="{{itemNota.item_numero}}">{{getItem(itemNota.item_numero)?.numero_item}} - {{getItem(itemNota.item_numero)?.nome}}</option>
   </select>
 
   <div>
     <input type="number" [(ngModel)]="qtdUtilizada" id="valorItem" name="valor" class="form-control me-3"
-      style="max-width: 10vw; min-height: 3vh; margin-top: 0px;" placeholder="Qtd Utilizada" />
+      style="max-width: 10vw; min-height: 3vh; margin-top: 0px;" placeholder="Qtd Utilizada" #inputQtdUtilizada />
   </div>
 
   <div>
     <input type="text" [(ngModel)]="nota_fiscal" id="notaFiscal" name="valor" class="form-control me-3"
-      style="max-width: 10vw; min-height: 3vh; margin-top: 0px;" placeholder="Nota Fiscal" />
+      style="max-width: 10vw; min-height: 3vh; margin-top: 0px;" placeholder="Nota Fiscal" #inputNotaFiscal/>
   </div>
 
   <button type="button" class="btn btn-outline-success" (click)="cadOmInNota()">{{operacao}}</button>
-  <button type="button" class="btn btn-outline-warning ms-1" (click)="cancelarEdicao()"
+  <button type="button" class="btn btn-outline-warning ms-1" (click)="clearForm()"
     *ngIf="operacao == 'Editar'">Cancelar Edição</button>
-  <button type="button" class="btn btn-outline-secondary ms-1" (click)="getNotasOm()">Atualizar</button>
+  <button type="button" class="btn btn-outline-secondary ms-1" (click)="getUtilizacao()">Atualizar</button>
 
 </div>
 <!----------------------- TABELA ----------------------------->
@@ -32,30 +32,32 @@
   <table class="table mt-4">
     <thead>
       <tr>
-        <th scope="col" class="col-3">Item</th>
-        <th scope="col" class="col-4">OM</th>
+        <th scope="col">OM</th>
+        <th scope="col" class="col-2">Item</th>
         <th scope="col" class="col-3">Qtd Utilizada</th>
+        <th scope="col" class="col-3">Nota Fiscal</th>
         <th scope="col">Operação</th>
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let notaOm of notasOm">
-        <th scope="row">{{ getItem(searchItemNotaEmpenho(notaOm.item_nota_empenho_id)?.item_numero)?.nome }}</th>
-        <th scope="row">{{ searchOm(notaOm.om_id)?.nome }}</th>
-        <th scope="row">{{ notaOm.qtd_utilizada }}</th>
+      <tr *ngFor="let utilizacao of utilizacaoNota">
+        <th scope="row">{{ searchOm(utilizacao.om_id)?.nome }}</th>
+        <th scope="row">{{ getItem(searchItemNotaEmpenho(utilizacao.item_nota_empenho_id)?.item_numero)?.nome }}</th>
+        <th scope="row">{{ utilizacao.qtd_utilizada }}</th>
+        <th scope="row">{{ utilizacao.nota_fiscal }}</th>
         <td>
           <img style="margin-right: 10px; cursor: pointer" title="Editar" src="/assets/imgs/pencil.png" alt="Editar"
-            (click)="editar(notaOm)" />
+            (click)="editar(utilizacao)" />
           <img style="cursor: pointer" title="Excluir" src="/assets/imgs/delete.png" alt="Excluir"
-            (click)="excluir(notaOm)" />
+            (click)="excluir(utilizacao)" />
 
-          <!--<p (click)="teste(notaOm)">testar aqui</p>-->
+          <!--<p (click)="teste(utilizacao)">testar aqui</p>-->
         </td>
       </tr>
     </tbody>
   </table>
   <!----------------------- TOTAL ------------------------------->
-  <p class="text-end">Total: <strong>{{notasOm.length}}</strong>
+  <p class="text-end">Total: <strong>{{utilizacaoNota.length}}</strong>
     <span> OM utilizando itens do empenho</span>
   </p>
 </section>

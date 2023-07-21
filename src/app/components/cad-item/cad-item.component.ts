@@ -57,7 +57,7 @@ export class CadItemComponent implements OnInit {
   }
 
   itemValue(item: Item){ //deixar o valor do item com 2 casas decimais
-    return parseFloat(item.valor).toFixed(2)
+    return parseFloat(item.valor).toFixed(2).replace(",", ".")
   }
 
   itemExists(itemNumber: Number): Item | undefined {
@@ -76,16 +76,15 @@ export class CadItemComponent implements OnInit {
   cadastrar() {
     if (this.operacao == 'Cadastrar' && !this.validNumItem()) return;
 
+    console.log(this.valor)
 
     let newItem: Item = {
       numero_item: this.numItem,
       nome: this.nomeItem,
       descricao: this.desc,
-      valor: this.valor,
+      valor: this.valor.replace(",", "."),
       und_md: this.und_md
     };
-
-    console.log(newItem)
 
     if (this.operacao == 'Cadastrar') {
       this.listService.cadItem(newItem.descricao != '' ? newItem : { ...newItem, descricao: 'N/D' }); //se a descrição estiver vazia envia um "N/D"
@@ -115,6 +114,7 @@ export class CadItemComponent implements OnInit {
       this.divItem.nativeElement.classList.add('d-none');
       this.tableItens.nativeElement.classList.remove('transparencia');
       this.btnsItem.nativeElement.classList.remove('d-none');
+      this.inputNumItem.nativeElement.classList.remove('is-invalid');
       this.operacao = "Cadastrar";
       this.inputNumItem.nativeElement.disabled = false;
       this.clearForm();

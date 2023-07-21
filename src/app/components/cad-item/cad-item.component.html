@@ -2,6 +2,12 @@
 
     <!---------------------  LISTAGEM --------------------------->
     <div class="d-flex justify-content-between mt-3">
+
+        <form class="d-flex" style="max-height: 40px;">
+            <input type="text" class="form-control shadow-sm" style="border-radius: 5px 0px 0px 5px;" placeholder="Pesquise aqui...">
+            <button type="button" class="btn btn-primary shadow" style="border-radius: 0px 5px 5px 0px; max-width: 50px;"><box-icon name='search-alt' ></box-icon></button>
+        </form>
+
         <div class="alert alert-danger opacity-0" role="alert" #divInfo>
             <box-icon [attr.name]="lastInfo.icon" class="me-1" #iconMsg></box-icon><span
                 [innerHTML]="lastInfo.message"></span>

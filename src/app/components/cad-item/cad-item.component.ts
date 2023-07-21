@@ -16,6 +16,7 @@ export class CadItemComponent implements OnInit {
   }
 
   itens: Item[] = [];
+  itensSearch: Item[] = [];
 
   numItem: Number = 0;
   nomeItem: String = '';
@@ -66,11 +67,17 @@ export class CadItemComponent implements OnInit {
     );
   }
 
+  refreshItensSearch(event: any){
+    this.itensSearch = this.itens.filter((item) => item.nome.toUpperCase().includes(event.target.value.toUpperCase()))
+  }
+
   //---------------- Operações --------------------//
   getItens(): void {
     this.listService
       .getItens()
-      .subscribe((itens) => (this.itens = itens));
+      .subscribe((itens) => {
+        this.itens = itens;
+        this.itensSearch = itens});
   }
 
   cadastrar() {

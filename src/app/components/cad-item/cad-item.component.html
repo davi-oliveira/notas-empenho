@@ -3,8 +3,8 @@
     <!---------------------  LISTAGEM --------------------------->
     <div class="d-flex justify-content-between mt-3">
 
-        <form class="d-flex" style="max-height: 40px;">
-            <input type="text" class="form-control shadow-sm" style="border-radius: 5px 0px 0px 5px;" placeholder="Pesquise aqui..." (input)="refreshItensSearch($event)">
+        <form class="d-flex" style="max-height: 40px;" id="searchByItem">
+            <input type="text" class="form-control shadow-sm" style="border-radius: 5px 0px 0px 5px;" id="inputSearch" placeholder="Pesquise aqui..." (input)="refreshItensSearch($event)">
             <button type="button" class="btn btn-primary shadow" style="border-radius: 0px 5px 5px 0px; max-width: 50px;"><box-icon name='search-alt' ></box-icon></button>
         </form>
 
@@ -80,7 +80,7 @@
             <div class="d-flex flex-column align-items-center">
                 <label for="inputDescItem" class="form-label">Descrição:</label>
                 <div class="form-floating">
-                    <textarea [(ngModel)]="desc" name="desc" class="form-control" placeholder="Leave a comment here"
+                    <textarea [(ngModel)]="desc" name="desc" class="form-control" placeholder="Leave a comment here" style="min-height: 12vh;"
                         id="inputDescItem"></textarea>
                 </div>
             </div>

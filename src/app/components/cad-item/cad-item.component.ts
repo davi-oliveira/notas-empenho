@@ -8,15 +8,19 @@ import { Item } from 'src/app/interfaces/Item';
   styleUrls: ['./cad-item.component.css']
 })
 
+
 export class CadItemComponent implements OnInit {
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
   constructor(private listService: ListService) {
+    this.body = document.getElementsByTagName('body')[0];
     this.getItens();
   }
 
   itens: Item[] = [];
   itensSearch: Item[] = [];
+
+  body: any;
 
   numItem: Number = 0;
   nomeItem: String = '';
@@ -57,7 +61,7 @@ export class CadItemComponent implements OnInit {
     }
   }
 
-  itemValue(item: Item){ //deixar o valor do item com 2 casas decimais
+  itemValue(item: Item) { //deixar o valor do item com 2 casas decimais
     return parseFloat(item.valor).toFixed(2).replace(",", ".")
   }
 
@@ -67,8 +71,8 @@ export class CadItemComponent implements OnInit {
     );
   }
 
-  refreshItensSearch(event: any){
-    this.itensSearch = this.itens.filter((item) => item.nome.toUpperCase().includes(event.target.value.toUpperCase()))
+  refreshItensSearch(event: any) {
+    this.itensSearch = this.itens.filter((item) => item.nome.toUpperCase().includes(event.target.value.toUpperCase()) || item.descricao.toUpperCase().includes(event.target.value.toUpperCase()))
   }
 
   //---------------- Operações --------------------//
@@ -77,7 +81,8 @@ export class CadItemComponent implements OnInit {
       .getItens()
       .subscribe((itens) => {
         this.itens = itens;
-        this.itensSearch = itens});
+        this.itensSearch = itens
+      });
   }
 
   cadastrar() {
@@ -113,6 +118,8 @@ export class CadItemComponent implements OnInit {
       this.divItem.nativeElement.classList.remove('d-none');
       this.tableItens.nativeElement.classList.add('transparencia');
       this.btnsItem.nativeElement.classList.add('d-none');
+      this.body.style.overflow = "hidden";
+      document.getElementById('searchByItem')?.classList.add('d-none')
     });
   }
 
@@ -124,6 +131,8 @@ export class CadItemComponent implements OnInit {
       this.inputNumItem.nativeElement.classList.remove('is-invalid');
       this.operacao = "Cadastrar";
       this.inputNumItem.nativeElement.disabled = false;
+      this.body.style.overflow = "scroll";
+      document.getElementById('searchByItem')?.classList.remove('d-none')
       this.clearForm();
     });
   }

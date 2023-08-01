@@ -24,7 +24,9 @@ select{
 
 #divCadItem{
     height: 85vh;
-    width: 100%;
+    min-width: 67.5vw;
+    top: 9%;
+    left: 16.3%;
 }
 
 .transparencia{
@@ -45,6 +47,10 @@ h3{
 
 label{
     font-size: 1.1rem;
+}
+
+.btn-acao{
+    max-height: 70%;
 }
 
 #btnCadastro{

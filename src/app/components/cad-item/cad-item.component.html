@@ -1,11 +1,14 @@
-<div class="page position-relative" style="min-height: 70vh;">
+<div class="page position-relative " style="min-height: 70vh;">
 
     <!---------------------  LISTAGEM --------------------------->
     <div class="d-flex justify-content-between mt-3">
 
         <form class="d-flex" style="max-height: 40px;" id="searchByItem">
-            <input type="text" class="form-control shadow-sm" style="border-radius: 5px 0px 0px 5px;" id="inputSearch" placeholder="Pesquise aqui..." (input)="refreshItensSearch($event)">
-            <button type="button" class="btn btn-primary shadow" style="border-radius: 0px 5px 5px 0px; max-width: 50px;"><box-icon name='search-alt' ></box-icon></button>
+            <input type="text" class="form-control shadow-sm" style="border-radius: 5px 0px 0px 5px;" id="inputSearch"
+                placeholder="Pesquise aqui..." (input)="refreshItensSearch($event)">
+            <button type="button" class="btn btn-primary shadow"
+                style="border-radius: 0px 5px 5px 0px; max-width: 50px;"><box-icon
+                    name='search-alt'></box-icon></button>
         </form>
 
         <div class="alert alert-danger opacity-0" role="alert" #divInfo>
@@ -13,11 +16,11 @@
                 [innerHTML]="lastInfo.message"></span>
         </div>
 
-        <div class="buttons" #btnsItem style="max-width: 67.5vw;">
-            <button type="button" class="btn btn-outline-secondary float-end ms-1" (click)="getItens()">
+        <div class="buttons d-flex" #btnsItem style="max-width: 67.5vw;">
+            <button type="button" class="btn btn-outline-secondary float-end ms-1 btn-acao" (click)="getItens()">
                 Atualizar
             </button>
-            <button type="button" class="btn btn-outline-primary shadow-sm ms-2 float-end" (click)="openCadItem()">
+            <button type="button" class="btn btn-outline-primary shadow-sm ms-2 float-end btn-acao" (click)="openCadItem()">
                 Cadastrar
             </button>
         </div>
@@ -57,56 +60,55 @@
             <span *ngIf="itens.length===1">item</span>
         </p>
     </section>
+</div>
 
-    <!------------- CARD SOBREPOSTO --------------------------->
-    <div class="d-none text-white position-absolute d-flex justify-content-center align-items-center" id="divCadItem"
-        style="top: 15px" #divItem>
-        <form
-            class="text-black d-flex flex-column align-items-center justify-content-around p-3 shadow bg-white rounded col-10 col-sm-9 col-md-7 col-lg-6 col-xl-4"
-            style="min-width: 22vw; min-height: 73vh;">
-            <h3 class="font-weight-bold">{{operacao}} Item</h3>
-            <div class="d-flex flex-column align-items-center">
-                <label for="" class="form-label">Número do Item:</label>
-                <input type="number" [(ngModel)]="numItem" id="validationNumCont" name="numCont" class="form-control"
-                    aria-describedby="emailHelp" (blur)="validNumItem()" #inputNumItem>
-                <div id="validationNumCont" class="invalid-feedback">
-                    Item já existe
-                </div>
+<!------------- CARD SOBREPOSTO --------------------------->
+<div class="d-none text-white position-fixed d-flex justify-content-center align-items-center" id="divCadItem" #divItem>
+    <form
+        class="text-black d-flex flex-column align-items-center justify-content-around p-3 shadow bg-white rounded col-10 col-sm-9 col-md-7 col-lg-6 col-xl-5 col-xxl-4"
+        style="min-height: 73vh;">
+        <h3 class="font-weight-bold">{{operacao}} Item</h3>
+        <div class="d-flex flex-column align-items-center">
+            <label for="" class="form-label">Número do Item:</label>
+            <input type="number" [(ngModel)]="numItem" id="validationNumCont" name="numCont" class="form-control"
+                aria-describedby="emailHelp" (blur)="validNumItem()" #inputNumItem>
+            <div id="validationNumCont" class="invalid-feedback">
+                Item já existe
             </div>
-            <div class="d-flex flex-column align-items-center">
-                <label for="nomeItem" class="form-label">Nome:</label>
-                <input type="text" [(ngModel)]="nomeItem" id="nomeItem" name="nomeItem" class="form-control" />
+        </div>
+        <div class="d-flex flex-column align-items-center">
+            <label for="nomeItem" class="form-label">Nome:</label>
+            <input type="text" [(ngModel)]="nomeItem" id="nomeItem" name="nomeItem" class="form-control" />
+        </div>
+        <div class="d-flex flex-column align-items-center">
+            <label for="inputDescItem" class="form-label">Descrição:</label>
+            <div class="form-floating">
+                <textarea [(ngModel)]="desc" name="desc" class="form-control" placeholder="Leave a comment here"
+                    style="min-height: 12vh;" id="inputDescItem"></textarea>
             </div>
-            <div class="d-flex flex-column align-items-center">
-                <label for="inputDescItem" class="form-label">Descrição:</label>
-                <div class="form-floating">
-                    <textarea [(ngModel)]="desc" name="desc" class="form-control" placeholder="Leave a comment here" style="min-height: 12vh;"
-                        id="inputDescItem"></textarea>
-                </div>
-            </div>
-            <div class="d-flex flex-column align-items-center">
-                <label for="undMd" class="form-label">Und/md:</label>
-                <select class="form-select" id="undMd" [(ngModel)]="und_md" name="undMd">
-                    <option selected value="unselect">Selecione aqui...</option>
-                    <option value="UND">UND</option>
-                    <option value="ML">ML</option>
-                </select>
+        </div>
+        <div class="d-flex flex-column align-items-center">
+            <label for="undMd" class="form-label">Und/md:</label>
+            <select class="form-select" id="undMd" [(ngModel)]="und_md" name="undMd">
+                <option selected value="unselect">Selecione aqui...</option>
+                <option value="UND">UND</option>
+                <option value="ML">ML</option>
+            </select>
 
-            </div>
-            <div class="d-flex flex-column align-items-center">
-                <label for="valorItem" class="form-label">Valor:</label>
-                <input type="text" [(ngModel)]="valor" id="valorItem" name="valor" class="form-control" />
-            </div>
+        </div>
+        <div class="d-flex flex-column align-items-center">
+            <label for="valorItem" class="form-label">Valor:</label>
+            <input type="text" [(ngModel)]="valor" id="valorItem" name="valor" class="form-control" />
+        </div>
 
-            <div class="d-flex justify-content-center" style="bottom: 50px;">
-                <button type="button" (click)="cadastrar()"
-                    class="btn btn-outline-primary float-right text-right shadow-sm" id="btnCadastro">
-                    {{operacao}}
-                </button>
-            </div>
-        </form>
+        <div class="d-flex justify-content-center" style="bottom: 50px;">
+            <button type="button" (click)="cadastrar()" class="btn btn-outline-primary float-right text-right shadow-sm"
+                id="btnCadastro">
+                {{operacao}}
+            </button>
+        </div>
+    </form>
 
-        <img src="/assets/imgs/delete.png" alt="" srcset=""
-            style="position: absolute; top: 5px; right: 5px; cursor: pointer" (click)="closeCadItem()" />
-    </div>
+    <img src="/assets/imgs/delete.png" alt="" srcset=""
+        style="position: absolute; top: 5px; right: 5px; cursor: pointer" (click)="closeCadItem()" />
 </div>

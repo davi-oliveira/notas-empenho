@@ -5,7 +5,6 @@ import { ListService as ItemService } from 'src/app/services/itens-service/list.
 import { ListService as ItemNotaService } from 'src/app/services/item-nota/list.service';
 import { ActivatedRoute } from '@angular/router';
 import { OM } from 'src/app/interfaces/OM';
-import { NotaOM } from 'src/app/interfaces/NotaOM';
 import { Item } from 'src/app/interfaces/Item';
 import { ItemNota } from 'src/app/interfaces/ItemNota';
 import { Utilizacao } from 'src/app/interfaces/Utilizacao';
@@ -52,17 +51,23 @@ export class NotaEmpenhoOmComponent implements OnInit {
 
   //---------------- Operações --------------------//
 
-  refreshInfos(): void{
-    this.getUtilizacao();
+  refreshInfos() {
     this.getOm();
     this.getItens();
     this.getItensNota();
+    this.getUtilizacao();
   }
+
   getUtilizacao(): void {
     this.listService
       .getNotaOm()
-      .subscribe((notasOm) => (this.utilizacaoNota = notasOm))
+      .subscribe((notasOm) => {
+        this.utilizacaoNota = notasOm.filter((notaOm) => {
+          this.searchItemNotaEmpenho(notaOm.item_nota_empenho_id)!.empenho_numero == this.nota
+        })
+      })
   }
+
   getOm(): void {
     this.omService
       .getOm()
@@ -75,40 +80,38 @@ export class NotaEmpenhoOmComponent implements OnInit {
       .subscribe((itens) => (this.itens = itens))
   }
 
-  getItem(numeroItem: Number | undefined): Item | undefined{
+  getItem(numeroItem: Number | undefined): Item | undefined {
     return this.itens.find((item) => item.numero_item == numeroItem)
   }
 
-  getItensNota(): void{
-    this.itemNotaService
+  async getItensNota() {
+    await this.itemNotaService
       .getItensNota()
-      .subscribe((itensNota) => (this.itensNota = itensNota.filter((itemNota) => itemNota.empenho_numero == this.nota)))
+      .subscribe((itensNota) => {
+        this.itensNota = itensNota.filter((itemNota) => itemNota.empenho_numero == this.nota)
+      })
+
+    console.log('itens nota no getitensnota: ', this.itensNota)
   }
 
   searchOm(numero: Number): OM | undefined {
     return this.om.find((om) => om.id == numero)
   }
 
-  searchItemNotaEmpenho(id: Number | undefined) : ItemNota | undefined {
+  searchItemNotaEmpenho(id: Number | undefined): ItemNota | undefined {
+    console.log("itens nota agora: ", this.itensNota)
+    setTimeout(() => console.log("itens nota agora: ", this.itensNota), 2000);
     return this.itensNota.find((itemNota) => itemNota.id == id)
   }
 
-  searchItemByItemNota(itemNota: ItemNota | undefined) : Item | undefined{
+  searchItemByItemNota(itemNota: ItemNota | undefined): Item | undefined {
     return this.getItem(itemNota?.item_numero)
   }
 
-  searchItemByNotaOm(notaOm: Utilizacao) : Item | undefined{
+  searchItemByNotaOm(notaOm: Utilizacao): Item | undefined {
     console.log(notaOm)
     let itemNota = this.searchItemNotaEmpenho(notaOm.id);
     return this.searchItemByItemNota(itemNota);
-  }
-
-  teste(notaOm: Utilizacao){
-    console.log(this.searchItemByNotaOm(notaOm)?.nome)
-    console.log(notaOm.item_nota_empenho_id)
-    console.log(this.searchItemNotaEmpenho(notaOm.item_nota_empenho_id))
-    console.log(this.getItem(this.searchItemNotaEmpenho(notaOm.item_nota_empenho_id)?.item_numero)?.nome)
-    console.log("=====================")
   }
 
   cadOmInNota() {

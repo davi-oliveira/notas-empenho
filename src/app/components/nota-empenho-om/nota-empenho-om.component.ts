@@ -99,8 +99,8 @@ export class NotaEmpenhoOmComponent implements OnInit {
   }
 
   searchItemNotaEmpenho(id: Number | undefined): ItemNota | undefined {
-    console.log("itens nota agora: ", this.itensNota)
-    setTimeout(() => console.log("itens nota agora: ", this.itensNota), 2000);
+    console.log("itens nota antes: ", this.itensNota)
+    setTimeout(() => console.log("itens nota depois: ", this.itensNota), 2000);
     return this.itensNota.find((itemNota) => itemNota.id == id)
   }
 

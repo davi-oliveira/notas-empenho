@@ -77,7 +77,9 @@ export class CadContratoComponent implements OnInit {
   getContratos(): void {
     this.listService
       .getCtn()
-      .subscribe((contratos) => (this.contratos = contratos));
+      .subscribe((contratos) => {
+        this.contratos = contratos.content
+      })
   }
 
   cadastrar() {

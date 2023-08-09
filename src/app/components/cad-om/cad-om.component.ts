@@ -63,7 +63,7 @@ export class CadOMComponent implements OnInit {
   getOm(): void {
     this.listService
       .getOm()
-      .subscribe((om) => (this.om = om));
+      .subscribe((om) => (this.om = om.content));
   }
 
   cadastrar() {

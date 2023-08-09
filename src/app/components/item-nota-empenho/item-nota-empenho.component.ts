@@ -45,12 +45,12 @@ export class ItemNotaEmpenhoComponent implements OnInit {
   getItemNotas(): void {
     this.listService
       .getItensNota()
-      .subscribe((itemNotas) => (this.itemNotas = itemNotas.filter((itemNota) => itemNota.empenho_numero == this.nota)))
+      .subscribe((itemNotas) => (this.itemNotas = itemNotas.content.filter((itemNota: ItemNota) => itemNota.empenho_numero == this.nota)))
   }
   getItens(): void {
     this.itemListService
       .getItens()
-      .subscribe((itens) => (this.itens = itens));
+      .subscribe((itens) => (this.itens = itens.content));
   }
 
   searchItem(numero: Number): Item | undefined {

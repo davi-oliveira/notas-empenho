@@ -80,8 +80,8 @@ export class CadItemComponent implements OnInit {
     this.listService
       .getItens()
       .subscribe((itens) => {
-        this.itens = itens;
-        this.itensSearch = itens
+        this.itens = itens.content;
+        this.itensSearch = itens.content
       });
   }
 

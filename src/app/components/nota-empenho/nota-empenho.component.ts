@@ -70,11 +70,11 @@ export class NotaEmpenhoComponent implements OnInit {
   getNotas(): void {
     this.listService
       .getNotas()
-      .subscribe((notas) => (this.notas = notas));
+      .subscribe((notas) => (this.notas = notas.content));
 
     this.ctnListService
       .getCtn()
-      .subscribe((contratos) => (this.contratos = contratos));
+      .subscribe((contratos) => (this.contratos = contratos.content));
   }
 
   cadastrar() {

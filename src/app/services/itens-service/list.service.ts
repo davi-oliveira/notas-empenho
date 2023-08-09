@@ -14,7 +14,7 @@ export class ListService {
 
   constructor(private http: HttpClient) { }
 
-  getItens(): Observable<Item[]> {
+  getItens(): Observable<any> {
     return this.http.get<Item[]>(this.apiUrl)
   }
 

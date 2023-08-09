@@ -12,7 +12,7 @@ export class ListService {
 
   constructor(private http: HttpClient) { }
 
-  getNotas(): Observable<NotaEmpenho[]>{
+  getNotas(): Observable<any>{
     return this.http.get<NotaEmpenho[]>(this.apiUrl)
   }
 

@@ -14,7 +14,7 @@ export class ListService {
 
   apiUrl = `${environment.apiURL}/itemNota`
 
-  getItensNota(): Observable<ItemNota[]> {
+  getItensNota(): Observable<any> {
     return this.http.get<ItemNota[]>(this.apiUrl)
   }
 

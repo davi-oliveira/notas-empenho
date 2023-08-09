@@ -14,7 +14,7 @@ export class ListService {
 
   apiUrl = `${environment.apiURL}/utilizacao`
 
-  getNotaOm(): Observable<Utilizacao[]> {
+  getNotaOm(): Observable<any> {
     return this.http.get<Utilizacao[]>(this.apiUrl)
   }
 

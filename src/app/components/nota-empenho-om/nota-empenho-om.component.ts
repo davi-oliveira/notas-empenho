@@ -8,6 +8,7 @@ import { OM } from 'src/app/interfaces/OM';
 import { Item } from 'src/app/interfaces/Item';
 import { ItemNota } from 'src/app/interfaces/ItemNota';
 import { Utilizacao } from 'src/app/interfaces/Utilizacao';
+import { firstValueFrom } from 'rxjs';
 
 @Component({
   selector: 'app-nota-empenho-om',
@@ -58,26 +59,38 @@ export class NotaEmpenhoOmComponent implements OnInit {
     this.getUtilizacao();
   }
 
-  getUtilizacao(): void {
+  /*getUtilizacao(): void {
     this.listService
       .getNotaOm()
       .subscribe((notasOm) => {
-        this.utilizacaoNota = notasOm.filter((notaOm) => {
-          this.searchItemNotaEmpenho(notaOm.item_nota_empenho_id)!.empenho_numero == this.nota
-        })
+        this.utilizacaoNota = notasOm.content.filter((notasOm: Utilizacao[]) => this.utilizacaoNota = notasOm.filter((notaOm) => {
+          this.searchItemNotaEmpenho(notaOm.item_nota_empenho_id)
+          console.log(this.searchItemNotaEmpenho(notaOm.item_nota_empenho_id))
+        }
+        ))
       })
+  }*/
+
+  getUtilizacao(): void {
+    this.listService
+      .getNotaOm()
+      .subscribe((notasOm) =>
+        this.utilizacaoNota = notasOm.content.filter((notaOm: Utilizacao) => {
+          return this.searchItemNotaEmpenho(notaOm.item_nota_empenho_id)?.empenho_numero == this.nota
+        }
+        ))
   }
 
   getOm(): void {
     this.omService
       .getOm()
-      .subscribe((om) => (this.om = om))
+      .subscribe((om) => (this.om = om.content))
   }
 
   getItens(): void {
     this.itemService
       .getItens()
-      .subscribe((itens) => (this.itens = itens))
+      .subscribe((itens) => (this.itens = itens.content))
   }
 
   getItem(numeroItem: Number | undefined): Item | undefined {
@@ -85,13 +98,15 @@ export class NotaEmpenhoOmComponent implements OnInit {
   }
 
   async getItensNota() {
-    await this.itemNotaService
-      .getItensNota()
-      .subscribe((itensNota) => {
-        this.itensNota = itensNota.filter((itemNota) => itemNota.empenho_numero == this.nota)
-      })
+    let itensNota = await firstValueFrom(this.itemNotaService.getItensNota());
 
-    console.log('itens nota no getitensnota: ', this.itensNota)
+    this.itensNota = itensNota.content.filter((itemNota: ItemNota) => itemNota.empenho_numero == this.nota);
+  }
+
+  changeItemNotaNumber(event: any){
+    let itemNum = event.target.value;
+
+    this.item_nota_numero = this.itensNota.find((itemNota) => itemNota.item_numero == itemNum)?.id!
   }
 
   searchOm(numero: Number): OM | undefined {
@@ -99,8 +114,6 @@ export class NotaEmpenhoOmComponent implements OnInit {
   }
 
   searchItemNotaEmpenho(id: Number | undefined): ItemNota | undefined {
-    console.log("itens nota antes: ", this.itensNota)
-    setTimeout(() => console.log("itens nota depois: ", this.itensNota), 2000);
     return this.itensNota.find((itemNota) => itemNota.id == id)
   }
 
@@ -109,7 +122,6 @@ export class NotaEmpenhoOmComponent implements OnInit {
   }
 
   searchItemByNotaOm(notaOm: Utilizacao): Item | undefined {
-    console.log(notaOm)
     let itemNota = this.searchItemNotaEmpenho(notaOm.id);
     return this.searchItemByItemNota(itemNota);
   }

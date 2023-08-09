@@ -13,7 +13,7 @@ export class ListService {
 
   apiUrl = `${environment.apiURL}/om`
 
-  getOm(): Observable<OM[]> {
+  getOm(): Observable<any> {
     return this.http.get<OM[]>(this.apiUrl + '?ordem=id')
   }
 

@@ -6,7 +6,7 @@
     <option *ngFor="let omU of om " value="{{omU.id}}">{{omU.nome}}</option>
   </select>
 
-  <select class="form-select me-3" aria-label="Selecione o item" style="max-width: 13vw;" #selectItem>
+  <select class="form-select me-3" aria-label="Selecione o item" style="max-width: 13vw;" (change)="changeItemNotaNumber($event)" #selectItem>
     <option selected value="no-selected">Selecione o item</option>
     <option *ngFor="let itemNota of itensNota " value="{{itemNota.item_numero}}">{{getItem(itemNota.item_numero)?.numero_item}} - {{getItem(itemNota.item_numero)?.nome}}</option>
   </select>

@@ -10,7 +10,7 @@ import { environment } from 'src/environments/environment';
 
 export class ListService {
 
-  apiUrl = `${environment.apiURL}/itens`
+  apiUrl = `${environment.apiURL}/itens?size=200`
 
   constructor(private http: HttpClient) { }
 

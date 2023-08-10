@@ -9,3 +9,7 @@ input, label, textarea{
     margin-top: 5px;
 }
 
+a{
+    cursor: pointer;
+}
+

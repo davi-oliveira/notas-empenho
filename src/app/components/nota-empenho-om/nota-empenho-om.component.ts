@@ -56,20 +56,8 @@ export class NotaEmpenhoOmComponent implements OnInit {
     this.getOm();
     this.getItens();
     this.getItensNota();
-    this.getUtilizacao();
+    setTimeout(() => this.getUtilizacao(), 500)
   }
-
-  /*getUtilizacao(): void {
-    this.listService
-      .getNotaOm()
-      .subscribe((notasOm) => {
-        this.utilizacaoNota = notasOm.content.filter((notasOm: Utilizacao[]) => this.utilizacaoNota = notasOm.filter((notaOm) => {
-          this.searchItemNotaEmpenho(notaOm.item_nota_empenho_id)
-          console.log(this.searchItemNotaEmpenho(notaOm.item_nota_empenho_id))
-        }
-        ))
-      })
-  }*/
 
   getUtilizacao(): void {
     this.listService
@@ -103,7 +91,7 @@ export class NotaEmpenhoOmComponent implements OnInit {
     this.itensNota = itensNota.content.filter((itemNota: ItemNota) => itemNota.empenho_numero == this.nota);
   }
 
-  changeItemNotaNumber(event: any){
+  changeItemNotaNumber(event: any) {
     let itemNum = event.target.value;
 
     this.item_nota_numero = this.itensNota.find((itemNota) => itemNota.item_numero == itemNum)?.id!
@@ -136,8 +124,6 @@ export class NotaEmpenhoOmComponent implements OnInit {
       om_id: this.selectOm.nativeElement.value,
       nota_fiscal: this.nota_fiscal
     }
-
-    console.log(utilizacaoToCad)
 
     if (this.operacao == 'Adicionar') {
       this.listService.cadNotaOm(utilizacaoToCad);

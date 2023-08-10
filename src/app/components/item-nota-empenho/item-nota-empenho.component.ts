@@ -20,6 +20,7 @@ export class ItemNotaEmpenhoComponent implements OnInit {
   
   
   itens: Item[] = [];
+  activeItem: String = 'itens-incluidos';
   
 
   operacao: String = 'Adicionar';
@@ -42,6 +43,10 @@ export class ItemNotaEmpenhoComponent implements OnInit {
   selectItem!: ElementRef;
 
   //---------------- Operações --------------------//
+  changeActiveItem(opcao: any): void{
+    this.activeItem = opcao;
+  }
+
   getItemNotas(): void {
     this.listService
       .getItensNota()

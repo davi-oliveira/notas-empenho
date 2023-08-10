@@ -88,8 +88,6 @@ export class CadItemComponent implements OnInit {
   cadastrar() {
     if (this.operacao == 'Cadastrar' && !this.validNumItem()) return;
 
-    console.log(this.valor)
-
     let newItem: Item = {
       numero_item: this.numItem,
       nome: this.nomeItem,

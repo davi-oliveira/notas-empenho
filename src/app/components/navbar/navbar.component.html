@@ -1,11 +1,12 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <div class="container-fluid">
-    <box-icon type='solid' name='bookmarks' class="me-1"></box-icon><a class="navbar-brand" routerLink="/">Sistema de Empenhos</a>
+    <box-icon type='solid' name='bookmarks' class="me-1"></box-icon><a class="navbar-brand" routerLink="/">Sistema de
+      Empenhos</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
       aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
+    <div class="collapse navbar-collapse" id="navbarNav" style="display: flex; justify-content: space-between;">
       <ul class="navbar-nav">
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarScrollingDropdown" role="button"
@@ -17,6 +18,23 @@
             <li><a class="dropdown-item" routerLink="/cadItem">Itens</a></li>
             <li><a class="dropdown-item" routerLink="/cadOM">OM</a></li>
             <li><a class="dropdown-item" routerLink="/cadNotaEmpenho">Notas de Empenho</a></li>
+          </ul>
+        </li>
+      </ul>
+      <ul class="navbar-nav">
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarScrollingDropdown" role="button"
+            data-bs-toggle="dropdown" aria-expanded="false">
+            Cb Davi Rosa
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
+            <li><a class="dropdown-item" routerLink="/">Administrador</a></li>
+            <li>
+              <a class="dropdown-item d-flex align-items-center" routerLink="/">
+                <box-icon name='log-out-circle'  class="me-1"></box-icon>
+                <span>Log Out</span>
+              </a>
+            </li>
           </ul>
         </li>
       </ul>

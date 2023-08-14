@@ -33,7 +33,7 @@ export class ListService {
   }
 
   deleteNotaOm(dados: Utilizacao) {
-    this.http.delete<Utilizacao>(this.apiUrl + '/delete/' + dados.id).subscribe(erro => {
+    this.http.delete<Utilizacao>(this.apiUrl + '/' + dados.id).subscribe(erro => {
       if (erro)
         console.log(erro)
     })

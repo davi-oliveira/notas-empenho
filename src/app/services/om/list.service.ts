@@ -32,7 +32,7 @@ export class ListService {
   }
 
   deleteOm(dados: OM) {
-    this.http.delete<OM>(this.apiUrl + '/delete/' + dados.id).subscribe(erro => {
+    this.http.delete<OM>(this.apiUrl + '/' + dados.id).subscribe(erro => {
       if (erro)
         console.log(erro)
     })

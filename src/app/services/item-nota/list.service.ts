@@ -15,7 +15,7 @@ export class ListService {
   apiUrl = `${environment.apiURL}/itemNota`
 
   getItensNota(): Observable<any> {
-    return this.http.get<ItemNota[]>(this.apiUrl)
+    return this.http.get<ItemNota[]>(this.apiUrl + '?size=300')
   }
 
   cadItemNota(dados: ItemNota) {
@@ -33,7 +33,7 @@ export class ListService {
   }
 
   deleteItemNota(dados: ItemNota) {
-    this.http.delete<ItemNota>(this.apiUrl + '/delete/' + dados.id).subscribe(erro => {
+    this.http.delete<ItemNota>(this.apiUrl + '/' + dados.id).subscribe(erro => {
       if (erro)
         console.log(erro)
     })

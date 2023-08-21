@@ -14,7 +14,7 @@ export class ListService {
   apiUrl = `${environment.apiURL}/contratos`
 
   getCtn(): Observable<any> {
-    return this.http.get<any>(this.apiUrl + '?ordem=numero_contrato')
+    return this.http.get<any>(this.apiUrl + '?ordem=numero_contrato&size=300')
   }
 
   cadContrato(dados: Contrato) {
@@ -32,7 +32,7 @@ export class ListService {
   }
 
   deleteCont(dados: Contrato) {
-    this.http.delete<Contrato>(this.apiUrl + '/delete/' + dados.numero_contrato).subscribe(erro => {
+    this.http.delete<Contrato>(this.apiUrl + "/" + dados.numero_contrato).subscribe(erro => {
       if (erro)
         console.log(erro)
     })

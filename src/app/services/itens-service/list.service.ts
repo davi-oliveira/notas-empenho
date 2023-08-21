@@ -10,12 +10,12 @@ import { environment } from 'src/environments/environment';
 
 export class ListService {
 
-  apiUrl = `${environment.apiURL}/itens?size=200`
+  apiUrl = `${environment.apiURL}/itens`
 
   constructor(private http: HttpClient) { }
 
   getItens(): Observable<any> {
-    return this.http.get<Item[]>(this.apiUrl)
+    return this.http.get<Item[]>(this.apiUrl + '?size=300')
   }
 
   cadItem(dados: Item) {
@@ -33,7 +33,7 @@ export class ListService {
   }
 
   deleteItem(dados: Item) {
-    this.http.delete<Item>(this.apiUrl + '/delete/' + dados.numero_item).subscribe(erro => {
+    this.http.delete<Item>(this.apiUrl + '/' + dados.numero_item).subscribe(erro => {
       if (erro)
         console.log(erro)
     })

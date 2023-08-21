@@ -15,7 +15,7 @@ export class ListService {
   apiUrl = `${environment.apiURL}/utilizacao`
 
   getNotaOm(): Observable<any> {
-    return this.http.get<Utilizacao[]>(this.apiUrl)
+    return this.http.get<Utilizacao[]>(this.apiUrl + '?size=300')
   }
 
   cadNotaOm(dados: Utilizacao) {

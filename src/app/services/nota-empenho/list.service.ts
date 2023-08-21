@@ -13,7 +13,7 @@ export class ListService {
   constructor(private http: HttpClient) { }
 
   getNotas(): Observable<any>{
-    return this.http.get<NotaEmpenho[]>(this.apiUrl)
+    return this.http.get<NotaEmpenho[]>(this.apiUrl + '?size=300')
   }
 
   cadNota(dados: NotaEmpenho){
@@ -30,7 +30,7 @@ export class ListService {
   }
 
   deleteNota(dados: NotaEmpenho){
-    this.http.delete<NotaEmpenho>(this.apiUrl + '/delete/' + dados.numero).subscribe(erro => {
+    this.http.delete<NotaEmpenho>(this.apiUrl + '/' + dados.numero).subscribe(erro => {
       if(erro) console.log(erro)
     })
   }

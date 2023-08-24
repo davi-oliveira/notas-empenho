@@ -28,8 +28,8 @@ export class LoginComponent implements OnInit {
 
   async mostrarConta() {
     try{
-      let teste = await firstValueFrom(this.service.logar(this.conta))
-      console.log('certo: ', teste)
+      let tokenObj = await firstValueFrom(this.service.logar(this.conta))
+      console.log('certo: ', tokenObj.tokenJWT)
       this.logged = true;
     }catch(err){
       console.log('erro: ', err)

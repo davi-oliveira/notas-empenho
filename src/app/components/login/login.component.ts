@@ -41,8 +41,6 @@ export class LoginComponent implements OnInit {
   }
   @Output() loggedBool: EventEmitter<any> = new EventEmitter()
   shareLogged(){
-    console.log('enviando para lá: ', this.logged)
     this.loggedBool.emit({logado: this.logged});
   }
-
 }

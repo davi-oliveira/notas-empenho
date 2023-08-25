@@ -16,6 +16,7 @@ export class ListService {
   getCtn(): Observable<any> {
     console.log('tentando com o header: ', environment.header)
     return this.http.get<any>(this.apiUrl + '?ordem=numero_contrato&size=300', {headers: environment.header})
+
   }
 
   cadContrato(dados: Contrato) {

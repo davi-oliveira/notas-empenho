@@ -12,10 +12,7 @@ export class AppComponent implements OnInit {
   title = 'notas-empenho';
   logged: boolean = localStorage.hasOwnProperty('token-empenho');
 
-  teste = setInterval(() => console.log(this.logged), 3000);
-
   onChangeLogged(event: any){
-    console.log('chegando aqui: ', event)
     this.logged = event.logado;
   }
 }

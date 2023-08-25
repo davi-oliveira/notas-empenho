@@ -1,7 +1,7 @@
 <app-message></app-message>
 
 <div class="container" *ngIf="logged">
-  <app-navbar></app-navbar>
+  <app-navbar (loggedBool)="onChangeLogged($event)"></app-navbar>
   <router-outlet></router-outlet>
 </div>
 

@@ -25,12 +25,12 @@
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarScrollingDropdown" role="button"
             data-bs-toggle="dropdown" aria-expanded="false">
-            P/G nome
+            <span *ngIf="usuarioLogado">{{usuarioLogado.grad}} {{usuarioLogado.nome}}</span>
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
             <li><a class="dropdown-item" routerLink="/">Administrador</a></li>
             <li>
-              <a class="dropdown-item d-flex align-items-center" routerLink="/">
+              <a class="dropdown-item d-flex align-items-center" routerLink="/" (click)="deslogar()">
                 <box-icon name='log-out-circle'  class="me-1"></box-icon>
                 <span>Log Out</span>
               </a>
@@ -41,3 +41,5 @@
     </div>
   </div>
 </nav>
+
+<button (click)="mostrarInfos()">mostrar</button>

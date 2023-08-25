@@ -14,7 +14,7 @@ export class ListService {
   apiUrl = `${environment.apiURL}/contratos`
 
   getCtn(): Observable<any> {
-    return this.http.get<any>(this.apiUrl + '?ordem=numero_contrato&size=300')
+    return this.http.get<any>(this.apiUrl + '?ordem=numero_contrato&size=300', {headers: environment.header})
   }
 
   cadContrato(dados: Contrato) {

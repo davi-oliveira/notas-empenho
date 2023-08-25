@@ -47,7 +47,9 @@
     justify-content: center;
 }
 
-
+h5, label, button{
+    font-weight: bold;
+}
 
 #btn-acessar{
     margin-top: 20px;

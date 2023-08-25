@@ -1,7 +1,7 @@
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http'
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http'
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -16,6 +16,7 @@ import { ItemNotaEmpenhoComponent } from './components/item-nota-empenho/item-no
 import { LoginComponent } from './components/login/login.component';
 import { LoginPageComponent } from './login-page/login-page.component';
 import { MessageComponent } from './components/message/message.component';
+import { GenTokenService } from './services/generate-token/gen.token.service';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,7 @@ import { MessageComponent } from './components/message/message.component';
     FormsModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [{provide: HTTP_INTERCEPTORS, useClass: GenTokenService, multi: true}],
   bootstrap: [AppComponent],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
 })

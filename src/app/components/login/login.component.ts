@@ -28,15 +28,13 @@ export class LoginComponent implements OnInit {
   async mostrarConta() {
     try{
       let tokenObj = await firstValueFrom(this.service.logar(this.conta))
-      console.log('certo: ', tokenObj.tokenJWT)
       this.logged = true;
       localStorage.setItem('token-empenho', tokenObj.tokenJWT);
-      console.log("token no storage: ",localStorage.getItem('token-empenho'));
+      this.messageService.setMessage('Logado com sucesso!', "success", "bx-check")
 
       this.shareLogged();
     }catch(err){
-      console.log('erro: ', err)
-      this.messageService.setMessage('<strong>Atenção!</strong> Usuário/senha incorretos')
+      this.messageService.setMessage('<strong class="me-1">Atenção!</strong> Usuário/senha incorretos', "danger", "bx-info-circle")
     }
   }
   @Output() loggedBool: EventEmitter<any> = new EventEmitter()

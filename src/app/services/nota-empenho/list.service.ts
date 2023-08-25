@@ -23,7 +23,6 @@ export class ListService {
   }
 
   editNota(dados: NotaEmpenho){
-    console.log("Atualizando para: " + dados)
     this.http.put<NotaEmpenho>(this.apiUrl, dados).subscribe(erro => {
       if(erro) console.log(erro)
     })

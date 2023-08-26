@@ -32,17 +32,17 @@
   <table class="table mt-4">
     <thead>
       <tr>
-        <th scope="col">OM</th>
-        <th scope="col" class="col-2">Item</th>
-        <th scope="col" class="col-3">Qtd Utilizada</th>
-        <th scope="col" class="col-3">Nota Fiscal</th>
+        <th scope="col" class="col-2">OM</th>
+        <th scope="col" class="col-5">Item</th>
+        <th scope="col" class="col-2">Qtd Utilizada</th>
+        <th scope="col" class="col-2">Nota Fiscal</th>
         <th scope="col">Operação</th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let utilizacao of utilizacaoNota">
         <th scope="row">{{ searchOm(utilizacao.om_id)?.nome }}</th>
-        <th scope="row">{{ getItem(searchItemNotaEmpenho(utilizacao.item_nota_empenho_id)?.item_numero)?.nome }}</th>
+        <th scope="row"><span class="text-danger">{{searchItemNotaEmpenho(utilizacao.item_nota_empenho_id)?.item_numero}}</span> - {{ getItem(searchItemNotaEmpenho(utilizacao.item_nota_empenho_id)?.item_numero)?.nome }}</th>
         <th scope="row">{{ utilizacao.qtd_utilizada }}</th>
         <th scope="row">{{ utilizacao.nota_fiscal }}</th>
         <td>
@@ -56,6 +56,6 @@
   </table>
   <!----------------------- TOTAL ------------------------------->
   <p class="text-end">Total: <strong>{{utilizacaoNota.length}}</strong>
-    <span> OM utilizando itens do empenho</span>
+    <span> utilizações de itens da nota de empenho</span>
   </p>
 </section>

@@ -9,7 +9,6 @@ export class EmitService{
 
   private msg: String = "";
   private type: String = "";
-  private icon: String = "";
 
   getMessage() {
     return {

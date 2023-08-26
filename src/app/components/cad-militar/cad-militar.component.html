@@ -1,1 +1,21 @@
-<p>cad-militar works!</p>
+<hr>
+<table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="table mt-2">
+    <thead>
+        <tr>
+            <th scope="col">Idt Militar</th>
+            <th scope="col">Usuário</th>
+            <th scope="col">Nome de Guerra</th>
+            <th scope="col" class="text-center">Administrador</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let militar of militares">
+            <th scope="row">{{militar.idt_militar}}</th>
+            <td>{{militar.usuario}}</td>
+            <td>{{militar.nome_guerra}}</td>
+            <td class="text-center"><span *ngIf="!militar.administrador">&#10060;</span> 
+                <span *ngIf="militar.administrador">&#9989;</span>
+            </td>
+        </tr>
+    </tbody>
+</table>

@@ -3,6 +3,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http'
 
+import { DataTablesModule } from 'angular-datatables';
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { MainPageComponent } from './components/main-page/main-page.component';
@@ -39,7 +41,8 @@ import { CadMilitarComponent } from './components/cad-militar/cad-militar.compon
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    DataTablesModule
   ],
   providers: [{provide: HTTP_INTERCEPTORS, useClass: GenTokenService, multi: true}],
   bootstrap: [AppComponent],

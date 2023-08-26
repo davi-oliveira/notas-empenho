@@ -28,7 +28,7 @@
             <span *ngIf="usuarioLogado">{{usuarioLogado.grad}} {{usuarioLogado.nome}}</span>
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
-            <li><a class="dropdown-item" routerLink="/">Administrador</a></li>
+            <li *ngIf="usuarioLogado.admin"><a class="dropdown-item" routerLink="/cadMilitar">Administrador</a></li>
             <li>
               <a class="dropdown-item d-flex align-items-center" routerLink="/" (click)="deslogar()">
                 <box-icon name='log-out-circle'  class="me-1"></box-icon>

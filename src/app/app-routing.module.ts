@@ -7,6 +7,7 @@ import { CadOMComponent } from './components/cad-om/cad-om.component';
 import { NotaEmpenhoComponent } from './components/nota-empenho/nota-empenho.component';
 import { NotaEmpenhoOmComponent } from './components/nota-empenho-om/nota-empenho-om.component';
 import { ItemNotaEmpenhoComponent } from './components/item-nota-empenho/item-nota-empenho.component';
+import { CadMilitarComponent } from './components/cad-militar/cad-militar.component';
 
 const routes: Routes = [
   {path: 'cadContrato', component: CadContratoComponent},
@@ -14,7 +15,8 @@ const routes: Routes = [
   {path: 'cadOM', component: CadOMComponent},
   {path: 'cadNotaEmpenho', component: NotaEmpenhoComponent},
   {path: 'notaEmpenhoOM', component: NotaEmpenhoOmComponent},
-  {path: 'itemNotaEmpenho/:notaId', component: ItemNotaEmpenhoComponent}
+  {path: 'itemNotaEmpenho/:notaId', component: ItemNotaEmpenhoComponent},
+  {path: 'cadMilitar', component: CadMilitarComponent}
 ];
 
 @NgModule({

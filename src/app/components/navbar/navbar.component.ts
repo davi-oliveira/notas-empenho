@@ -16,6 +16,7 @@ export class NavbarComponent implements OnInit {
 
     this.usuarioLogado.nome = this.tokenInfo.nome_guerra;
     this.usuarioLogado.grad = this.tokenInfo.posto_grad;
+    this.usuarioLogado.admin = this.tokenInfo.admin;
   }
 
 
@@ -25,14 +26,13 @@ export class NavbarComponent implements OnInit {
   usuarioLogado: {
     grad: String,
     nome: String,
-  } = {grad: 'P/G', nome: "Nome"}
+    admin: boolean
+  } = {grad: 'P/G', nome: "Nome", admin: false}
 
   mostrarInfos(){
    console.log(this.tokenInfo)
    console.log(localStorage.hasOwnProperty('token-empenho'))
   }
-
-
 
   @Output() loggedBool: EventEmitter<any> = new EventEmitter()
   deslogar(){

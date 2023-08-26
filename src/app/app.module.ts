@@ -17,6 +17,7 @@ import { LoginComponent } from './components/login/login.component';
 import { LoginPageComponent } from './login-page/login-page.component';
 import { MessageComponent } from './components/message/message.component';
 import { GenTokenService } from './services/generate-token/gen.token.service';
+import { CadMilitarComponent } from './components/cad-militar/cad-militar.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { GenTokenService } from './services/generate-token/gen.token.service';
     ItemNotaEmpenhoComponent,
     LoginComponent,
     LoginPageComponent,
-    MessageComponent
+    MessageComponent,
+    CadMilitarComponent
   ],
   imports: [
     BrowserModule,

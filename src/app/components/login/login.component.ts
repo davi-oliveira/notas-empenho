@@ -26,6 +26,8 @@ export class LoginComponent implements OnInit {
   logged = false;
 
   async mostrarConta() {
+    if(!this.conta.usuario || !this.conta.senha) return this.messageService.setMessage('<strong class="me-1">Atenção!</strong> Digite seus dados corretamente', "danger", "bx-info-circle")
+
     try{
       let tokenObj = await firstValueFrom(this.service.logar(this.conta))
       this.logged = true;

@@ -1,21 +1,80 @@
 <hr>
-<table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="table mt-2">
-    <thead>
-        <tr>
-            <th scope="col">Idt Militar</th>
-            <th scope="col">Usuário</th>
-            <th scope="col">Nome de Guerra</th>
-            <th scope="col" class="text-center">Administrador</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr *ngFor="let militar of militares">
-            <th scope="row">{{militar.idt_militar}}</th>
-            <td>{{militar.usuario}}</td>
-            <td>{{militar.nome_guerra}}</td>
-            <td class="text-center"><span *ngIf="!militar.administrador">&#10060;</span> 
-                <span *ngIf="militar.administrador">&#9989;</span>
-            </td>
-        </tr>
-    </tbody>
-</table>
+<div id="comps-listagem" *ngIf="operacao==null">
+    <button type="button"
+        class="btn btn-outline-success d-flex justify-content-center align-items-center mb-4 float-end"
+        (click)="cadastrar()">
+        <i class='bx bx-user-plus me-1' style="font-size: 1.4em;"></i>
+        <span>Novo Militar</span>
+    </button>
+    <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="table mt-2">
+        <thead>
+            <tr>
+                <th scope="col">Idt Militar</th>
+                <th scope="col">Usuário</th>
+                <th scope="col">Nome de Guerra</th>
+                <th scope="col">Administrador</th>
+                <th scope="col">Operação</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let militar of militares">
+                <th scope="row">{{militar.idt_militar}}</th>
+                <td>{{militar.usuario}}</td>
+                <td>{{militar.nome_guerra}}</td>
+                <td>
+                    <span *ngIf="!militar.administrador">&#10060;</span>
+                    <span *ngIf="militar.administrador">&#9989;</span>
+                </td>
+                <td>
+                    <img style="margin-right: 20px; cursor: pointer" title="Editar" src="/assets/imgs/pencil.png"
+                        alt="Editar" />
+                    <img style="cursor: pointer" title="Excluir" src="/assets/imgs/delete.png" alt="Excluir" />
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+
+<div class="container" style="height: 80vh;">
+    <div class="row align-items-center">
+        <div class="col">
+            <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="floatingInput" placeholder="name@example.com">
+                <label for="floatingInput">Identidade Militar</label>
+            </div>
+        </div>
+        <div class="col">
+            <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="floatingInput" placeholder="name@example.com">
+                <label for="floatingInput">Nome de Guerra</label>
+            </div>
+        </div>
+        <div class="col position-relative" style="height: 100%;">
+            <select class="form-select" aria-label="Large select example">
+                <option selected>Posto/Graduação</option>
+                <option value="1">One</option>
+                <option value="2">Two</option>
+                <option value="3">Three</option>
+            </select>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="floatingInput" placeholder="name@example.com">
+                <label for="floatingInput">Usuário</label>
+            </div>
+        </div>
+        <div class="col">
+            <div class="form-floating mb-3">
+                <input type="password" class="form-control" id="floatingInput" placeholder="name@example.com">
+                <label for="floatingInput">Senha</label>
+            </div>
+        </div>
+    </div>
+    <div class="form-check form-switch">
+        <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
+        <label class="form-check-label" for="flexSwitchCheckDefault">Administrador</label>
+    </div>
+</div>

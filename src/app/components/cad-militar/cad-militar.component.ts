@@ -10,9 +10,10 @@ import { ListService } from 'src/app/services/militar/list.service';
 })
 export class CadMilitarComponent implements OnInit {
 
-  constructor(private service: ListService) {}
+  constructor(private service: ListService) { }
 
   militares!: Militar[];
+  operacao: "Cadastrar" | "Editar" | null = "Cadastrar";
 
   ngOnInit(): void {
 
@@ -20,7 +21,18 @@ export class CadMilitarComponent implements OnInit {
       pagingType: 'full_numbers',
       language: {
         url: '//cdn.datatables.net/plug-ins/1.13.6/i18n/pt-BR.json'
-      }
+      },
+      columnDefs: [
+        {
+          "targets": 3,
+          "className": "text-center",
+        },
+        {
+          "targets": 4,
+          "className": "text-center",
+
+        }
+      ]
     };
     this.getMilitares();
   }
@@ -35,5 +47,9 @@ export class CadMilitarComponent implements OnInit {
         this.militares = militar.content
         this.dtTrigger.next(null);
       });
+  }
+
+  cadastrar(){
+
   }
 }

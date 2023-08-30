@@ -17,11 +17,11 @@ export class ItemNotaEmpenhoComponent implements OnInit {
   id: Number = 0;
   nota: Number = 0;
   itemNotas: ItemNota[] = [];
-  
-  
+
+
   itens: Item[] = [];
   activeItem: String = 'itens-incluidos';
-  
+
 
   operacao: String = 'Adicionar';
 
@@ -43,7 +43,7 @@ export class ItemNotaEmpenhoComponent implements OnInit {
   selectItem!: ElementRef;
 
   //---------------- Operações --------------------//
-  changeActiveItem(opcao: any): void{
+  changeActiveItem(opcao: any): void {
     this.activeItem = opcao;
   }
 
@@ -74,13 +74,13 @@ export class ItemNotaEmpenhoComponent implements OnInit {
 
 
     if (this.operacao == 'Adicionar') {
-      this.listService.cadItemNota(itemToCad);       
+      this.listService.cadItemNota(itemToCad);
     }
     else if (this.operacao == 'Editar') {
-      this.listService.editItemNota(itemToCad); 
+      this.listService.editItemNota(itemToCad);
     }
 
-    setTimeout(() => this.getItemNotas(), 500); 
+    setTimeout(() => this.getItemNotas(), 500);
     this.clearForm();
   }
 
@@ -98,14 +98,16 @@ export class ItemNotaEmpenhoComponent implements OnInit {
     this.selectItem.nativeElement.value = itemNota.item_numero;
     this.id = Number(itemNota.id);
     this.qtdEmpenho = itemNota.qtd_empenho;
+
+    window.scrollTo({ top: 0, behavior: "smooth" })
   }
 
-  cancelarEdicao(){
+  cancelarEdicao() {
     this.operacao = 'Adicionar'
     this.clearForm()
   }
 
-  clearForm(){
+  clearForm() {
     this.selectItem.nativeElement.value = "no-selected";
     this.operacao = 'Cadastrar'
     this.qtdEmpenho = 0;
